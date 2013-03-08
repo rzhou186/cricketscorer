@@ -5,7 +5,6 @@
  * 
  */
 
-
 var currStep = 0;
 
 var teamOne = new Object();

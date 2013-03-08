@@ -5,6 +5,8 @@
  * 
  */
 
+/* -------------------- App Control -------------------- */
+
 $(document).ready(function(){
 
  	$(".next-btn").click(function(){
@@ -52,3 +54,5 @@ function launchStep(step){
 	}
 
 }
+
+/* -------------------- Step Functions -------------------- */
