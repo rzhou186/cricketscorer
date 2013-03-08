@@ -1,7 +1,35 @@
 doctype 5
 html
-  head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+  
+	head
+		title= title
+
+		// -------------------- Stylesheets -------------------- //
+		link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+
+	body
+
+		// -------------------- Navbar (Top) ------------------- //
+		div.navbar.navbar-fixed-top.navbar-inverse
+			div.navbar-inner
+				div.container
+					a.brand(href='#')
+						strong CricketScorer
+					ul.nav.pull-right
+						li
+							a(href="#") About
+						li
+							a(href="#") Disclaimer
+
+		block content
+
+		// ------------------ Navbar (Bottom) ------------------ //
+		div.navbar.navbar-fixed-bottom.navbar-inverse
+			div.navbar-inner
+				div.container
+					ul.nav
+
+		// -------------------- Javascripts -------------------- //
+		script(src='/javascripts/jquery-1.9.1.min.js')
+		script(src='/bootstrap/js/bootstrap.min.js')
