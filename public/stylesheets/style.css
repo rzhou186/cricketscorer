@@ -1,3 +1,42 @@
 body {
-  padding-top: 50px;
+	padding-top: 75px;
+	padding-left: 0px;
+	padding-right: 0px;
+	text-align: center;
+}
+
+.container {
+	width: 100%;
+}
+
+.navbar-fixed-top {
+	margin-bottom: 0px;
+}
+
+.navbar-fixed-top .container {
+	width: 100%;
+	height: 60px;
+	padding-top: 15px;
+}
+
+.navbar-fixed-top .navbar-inner {
+	padding-left: 30px;
+	padding-right: 30px;
+	background-color: #000;
+  background-image: none;
+  background-repeat: no-repeat;
+  filter: none;
+}
+
+.subhead-window {
+	padding: 60px 80px 80px 80px;
+	background-color: red;
+}
+
+.subhead-window .btn-large {
+	height: 50px;
+}
+
+.app-window {
+	padding: 40px 80px 40px 80px;
 }
