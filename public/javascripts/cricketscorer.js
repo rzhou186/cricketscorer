@@ -58,8 +58,8 @@ function launchStep(step){
 function checkifValid(step) {
 	if(step === 1)
 	{
-		teamOne.Name = $("#team1-name").val;
-		teamTwo.Name = $("#team2-name").val;
+		teamOne.Name = $("#team1-name").val();
+		teamTwo.Name = $("#team2-name").val();
 		if($("#team1-radio").attr("checked") != "undefined") {
 		currBatting = teamOne;
 		}
