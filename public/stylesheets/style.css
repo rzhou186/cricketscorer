@@ -29,14 +29,11 @@ body {
 }
 
 .subhead-window {
-	padding: 60px 80px 80px 80px;
+	padding: 80px 80px 80px 80px;
 	background-color: red;
-}
-
-.subhead-window .btn-large {
-	height: 50px;
 }
 
 .app-window {
 	padding: 40px 80px 40px 80px;
+	background-color: blue;
 }
