@@ -376,6 +376,12 @@ function checkIfValid(step) {
 			currBatting.batsmen[currBatting.nonStrikeBatsman].out = outMethod;
 			currBatting.nonStrikeBatsman = -1;
 		}
+			var newBall = {
+				runs : 0,
+				ballType : "W",
+			};
+
+		currOver.push(newBall);
 		currBatting.wickets+=1;
 		currBowling.bowlers[currBowling.bowler].balls += 1;
 		currBatting.numBalls += 1;
