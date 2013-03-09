@@ -60,8 +60,6 @@ function launchStep(step){
 		$(".numBalls").html(currBatting.numBalls%6);
 		$(".batsmanName").val("");
 		$("#onStrike > button.active").val('yes');
-
-
 	}
 
 	else if (step === 3) {
@@ -93,15 +91,15 @@ function checkIfValid(step) {
 		}
 		if(teamOne.Name === "") {
 			alert ("Team name one is not filled yet");
-			return 0;
+			return 1;
 		}
 		else if(teamTwo.Name === "") {
 			alert ("Team name two is not filled yet");
-			return 0;
+			return 1;
 		}
 		else if($('#battingTeam > button.active').val() !== '1' && $('#battingTeam > button.active').val() !== '2') {
 			alert ("Select at least one of the radio buttons");
-			return 0;
+			return 1;
 		}
 
 		return 2;
@@ -113,7 +111,7 @@ function checkIfValid(step) {
 
 		if(batsmanName === "") {
 			alert("Please enter batsman name");
-			return 0;
+			return 2;
 		}
 
 		if($("#onStrike > button.active").val() === 'yes') {
@@ -123,9 +121,13 @@ function checkIfValid(step) {
 			if (currBatting.batsmen.length > 0 && currBatting.strikeBatsman < 0)
 			{
 				alert("At least one batsman must be on strike.");
-				return 0;
+				return 2;
 			}
 			currBatting.nonStrikeBatsman = currBatting.batsmen.length;
+		}
+		else {
+			alert("Must select if new batsman will be on strike or not");
+			return 2;
 		}
 
 		// Create a new batsman
