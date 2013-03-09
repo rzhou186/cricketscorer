@@ -80,6 +80,7 @@ function launchStep(step){
 		$(".numBalls").html(currBatting.numBalls%6);
 		$(".bowlerName").val("");
 
+    	$('.bowlerList').empty(); 
 		for(var i = 0; i < currBowling.bowlers.length; i++)
 		{
 			bowler = currBowling.bowlers[i];
