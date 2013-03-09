@@ -125,6 +125,10 @@ function launchStep(step){
 	else if (step === 5) {
 		$("#step-four").remove();
 		$("#step-five").css("display", "block");
+		$(".teamScore").html(currBatting.score);
+		$(".teamWickets").html(currBatting.wickets);
+		$(".numOvers").html(currBatting.numBalls/6);
+		$(".numBalls").html(currBatting.numBalls%6);
 	}
 
 	// Wicket Fall
@@ -358,6 +362,7 @@ function checkIfValid(step) {
 		else {
 			currBatting.batsmen[currBatting.nonStrikeBatsman].out = outMethod;
 		}
+		currBatting.wickets+=1;
 		currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
 		currBowling.bowlers[currBowling.bowler].balls += 1;
 		currBatting.numBalls += 1;
@@ -401,7 +406,8 @@ function checkIfValid(step) {
 		currBatting.score += (runs + extraRun);
 		var newBall = {
 			runs : runs,
-			ballType : extraType,
+			ballType : "E"
+			typeOfExtra : extraType,
 		};
 		currOver.push(newBall);		
 		if(currBatting.numBalls % 6 === 0) {
