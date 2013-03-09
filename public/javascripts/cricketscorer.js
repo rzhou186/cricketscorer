@@ -13,11 +13,11 @@ $(document).ready(function(){
 
  	$(".next-btn").click(function(){
  		// Increment currStep, then launch the next step.
- 		var flag = checkIfValid(currStep);
- 		if(flag > 0)
+ 		var nextStep = checkIfValid(currStep);
+ 		if(nextStep > 0)
  		{
- 			currStep++;
- 			launchStep(currStep);
+ 			launchStep(nextStep);
+ 			currStep = nextStep;
  		}
  	});
 
@@ -52,6 +52,7 @@ function launchStep(step){
 
 		// Update app window contents
 		$("#step-one").remove();
+
 		$("#step-two").css("display", "block");	
 		$(".batsmanNum").html(currBatting.batsmen.length+1);
 		$(".teamName").html(currBatting.Name);
@@ -59,7 +60,8 @@ function launchStep(step){
 		$(".teamWickets").html(currBatting.wickets);
 		$(".numOvers").html(currBatting.numBalls/6);
 		$(".numBalls").html(currBatting.numBalls%6);
-
+		$(".batsmanName").val("");
+		$("#onStrike > button.active").val('yes');
 	}
 
 	else if (step === 3) {
@@ -91,16 +93,18 @@ function checkIfValid(step) {
 		}
 		if(teamOne.Name === "") {
 			alert ("Team name one is not filled yet");
-			return 0;
+			return 1;
 		}
 		else if(teamTwo.Name === "") {
 			alert ("Team name two is not filled yet");
-			return 0;
+			return 1;
 		}
 		else if($('#battingTeam > button.active').val() !== '1' && $('#battingTeam > button.active').val() !== '2') {
 			alert ("Select at least one of the radio buttons");
-			return 0;
+			return 1;
 		}
+
+		return 2;
 	}
 	// Add batsman
 	else if(step === 2) {
@@ -109,18 +113,24 @@ function checkIfValid(step) {
 
 		if(batsmanName === "") {
 			alert("Please enter batsman name");
-			return 0;
+			return 2;
 		}
 
 		if($("#onStrike > button.active").val() === 'yes') {
 			currBatting.strikeBatsman = currBatting.batsmen.length;
 		}
-		else if (currBatting.batsmen.length > 0 && currBatting.strikeBatsman < 0)
-		{
-			alert("At least one batsman must be on strike.");
-			return 0;
+		else if($("#onStrike > button.active").val() === 'no') {
+			if (currBatting.batsmen.length > 0 && currBatting.strikeBatsman < 0)
+			{
+				alert("At least one batsman must be on strike.");
+				return 2;
+			}
+			currBatting.nonStrikeBatsman = currBatting.batsmen.length;
 		}
-
+		else {
+			alert("Must select if new batsman will be on strike or not");
+			return 2;
+		}
 
 		// Create a new batsman
 		var batsman = {
@@ -132,6 +142,14 @@ function checkIfValid(step) {
 		};
 		currBatting.batsmen.push(batsman);
 
+		if (currBatting.batsmen.length < 2)
+		{
+			return 2;
+		}
+		else
+		{
+			return 3;
+		}
 		//alert(batsman.name);
 	}
 
@@ -165,8 +183,8 @@ function checkIfValid(step) {
 		
 	}
 
-	// All checks successful
 	return 1;
+
 }
 
 

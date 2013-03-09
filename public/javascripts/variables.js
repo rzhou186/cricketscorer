@@ -18,9 +18,9 @@ teamOne.batsmen = new Array();
 teamOne.score = 0;
 teamOne.wickets = 0;
 teamOne.numBalls = 0;
-teamOne.strikeBatsman = 0;
-teamOne.nonStrikeBatsman = 0;
-teamOne.bowler = 0;
+teamOne.strikeBatsman = -1;
+teamOne.nonStrikeBatsman = -1;
+teamOne.bowler = -1;
 
 // Team Two
 
@@ -31,6 +31,6 @@ teamTwo.batsmen = new Array();
 teamTwo.score = 0;
 teamTwo.wickets = 0;
 teamTwo.numBalls = 0;
-teamTwo.strikeBatsman = 0;
-teamTwo.nonStrikeBatsman = 0;
-teamTwo.bowler = 0;
+teamTwo.strikeBatsman = -1;
+teamTwo.nonStrikeBatsman = -1;
+teamTwo.bowler = -1;
