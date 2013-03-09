@@ -21,7 +21,9 @@ $(document).ready(function(){
 
  	// Add Bowler
  	$(".addBowler").click(function(){
- 		checkIfValid(4);
+ 		nextStep = checkIfValid(100);
+ 		launchStep(nextStep);
+ 		currStep = nextStep;
  	});
 
  	// End Innings
@@ -76,9 +78,17 @@ function launchStep(step){
 		$(".teamWickets").html(currBatting.wickets);
 		$(".numOvers").html(currBatting.numBalls/6);
 		$(".numBalls").html(currBatting.numBalls%6);
-		$(".bowlerName").val("");	
-	}
+		$(".bowlerName").val("");
 
+		for(var i = 0; i < currBowling.bowlers.length; i++)
+		{
+			bowler = currBowling.bowlers[i];
+    		$('.bowlerList').append($('<option>', { 
+        		value: i,
+        		text : bowler.name 
+    		}));
+		}
+	}
 }
 
 /*
@@ -181,7 +191,6 @@ function checkIfValid(step) {
 			alert("Please enter new bowler name");
 			return 3;
 		}
-
 		// Create a new bowler
 		var bowler = {
 			name:bowlerName,
@@ -190,13 +199,14 @@ function checkIfValid(step) {
 			wickets:"0",
 		};
 		currBowling.bowlers.push(bowler);
-
-		return 4;
+		alert(bowler.name);
+		return 3;
 	}
 	
 	// Select bowler at the end of over	
 	else if(step === 3) {
-
+		//alert("Please select a bowler from the list.");
+		//currBowling.bowler = 
 	}
 
 	// Display score while ball is being played	
