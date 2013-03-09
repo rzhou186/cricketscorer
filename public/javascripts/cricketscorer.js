@@ -211,14 +211,14 @@ function checkIfValid(step) {
 		}
 
 		if($("#onStrike > button.active").val() === 'yes') {
-			if(currentBatting.strikeBatsman > 0)
+			if(currBatting.strikeBatsman > 0)
 			{
 				currBatting.nonStrikeBatsman = current.strikeBatsman;
 			}
 			currBatting.strikeBatsman = currBatting.batsmen.length;			
 		}
 		else if($("#onStrike > button.active").val() === 'no') {
-			if(currentBatting.nonStrikeBatsman > 0)
+			if(currBatting.nonStrikeBatsman > 0)
 			{
 				currBatting.strikeBatsman = current.nonStrikeBatsman;
 			}
