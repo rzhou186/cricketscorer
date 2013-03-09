@@ -12,6 +12,13 @@ var currBowling;
 
 // Team One
 
+
+var currOver = new Array();
+
+for(int i = 0; i < 6; i++) {
+	currOver.push(-1);
+}
+
 var teamOne = new Object();
 teamOne.Name = "";
 teamOne.bowlers = new Array();
