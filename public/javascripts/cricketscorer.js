@@ -29,6 +29,13 @@ $(document).ready(function(){
  		currStep = nextStep;
  	});
 
+ 	// Wicket fall
+ 	$(".wicket").click(function(){
+ 		nextStep = checkIfValid(6);
+ 		launchStep(nextStep);
+ 		currStep = nextStep; 
+ 	});
+
  	// End Innings
  	$(".endInnings").click(function(){
 
@@ -283,7 +290,7 @@ function checkIfValid(step) {
 
 	// Display score while ball is being played	
 	else if(step === 4) {
-
+		return 5;
 	}
 
 	// End ball and register score
