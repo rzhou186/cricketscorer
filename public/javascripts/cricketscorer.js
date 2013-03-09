@@ -92,6 +92,15 @@ function checkIfValid(step) {
 		$(".teamName").val(currBatting.Name);
 		$(".teamScore").val(currBatting.score);
 		$(".teamWickets").val(currBatting.wickets);
+
+		var batsman = {
+			name:$(".batsmanName").val(),
+			runs:0,
+			out:"not out",
+			fours:0,
+			sixes:0
+		};
+		currBatting.batsmen.push(batsman);
 	}
 	
 	// All checks successful
