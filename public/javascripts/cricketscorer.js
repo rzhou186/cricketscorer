@@ -9,8 +9,6 @@
 
 $(document).ready(function(){
 
-	$('#fdsa').button('toggle');
-
  	$(".next-btn").click(function(){
  		// Increment currStep, then launch the next step.
  		var nextStep = checkIfValid(currStep);
