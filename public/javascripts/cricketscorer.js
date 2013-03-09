@@ -228,7 +228,6 @@ function checkIfValid(step) {
 			}
 		}
 
-		alert(currBowling.bowler);
 		return 4;
 	}
 
