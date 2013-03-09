@@ -95,6 +95,17 @@ function launchStep(step){
 		// Update app window contents
 		$("#step-three").remove();
 		$("#step-four").css("display", "block");
+		$(".teamName").html(currBowling.Name);
+		$(".teamScore").html(currBatting.score);
+		$(".teamWickets").html(currBatting.wickets);
+		$(".numOvers").html(currBatting.numBalls/6);
+		$(".numBalls").html(currBatting.numBalls%6);
+		$(".strikeBatsman").html(currBatting.batsmen[currBatting.strikeBatsman].Name);
+		$(".nonStrikeBatsman").html(currBatting.batsmen[currBatting.nonStrikeBatsman].Name);
+		$(".strikeBatsmanRuns").html(currBatting.batsmen[currBatting.strikeBatsman].runs);
+		$(".nonStrikeBatsmanRuns").html(currBatting.batsmen[currBatting.nonStrikeBatsman].runs);
+		$(".bowler").html(currBowling.bowlers[currBatting.bowler].Name);
+
 	}
 }
 
@@ -167,10 +178,11 @@ function checkIfValid(step) {
 		// Create a new batsman
 		var batsman = {
 			name:batsmanName,
-			runs:"0",
+			runs: 0,
+			balls: 0,
 			out:"not out",
-			fours:"0",
-			sixes:"0"
+			fours: 0,
+			sixes: 0
 		};
 		currBatting.batsmen.push(batsman);
 
@@ -201,9 +213,9 @@ function checkIfValid(step) {
 		// Create a new bowler
 		var bowler = {
 			name:bowlerName,
-			runs:"0",
-			overs:"0",
-			wickets:"0",
+			runs: 0,
+			overs: 0,
+			wickets: 0,
 		};
 		currBowling.bowlers.push(bowler);
 		return 3;
