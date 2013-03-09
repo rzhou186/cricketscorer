@@ -29,13 +29,6 @@ $(document).ready(function(){
  		currStep = nextStep;
  	});
 
- 	// Wicket fall
- 	$(".wicket").click(function(){
- 		nextStep = checkIfValid(6);
- 		launchStep(nextStep);
- 		currStep = nextStep; 
- 	});
-
  	// End Innings
  	$(".endInnings").click(function(){
 
@@ -93,7 +86,7 @@ function launchStep(step){
     	$('.bowlerList').empty(); 
 		for(var i = 0; i < currBowling.bowlers.length; i++)
 		{
-			bowler = currBowling.bowlers[i];
+			var bowler = currBowling.bowlers[i];
     		$('.bowlerList').append($('<option>', { 
         		value: i,
         		text : bowler.name 
@@ -161,11 +154,28 @@ function launchStep(step){
 		}
 	}
 
-	else if (step == 5) {
+	// Register score
+	else if (step === 5) {
 		$("#step-four").remove();
 		$("#step-five").css("display", "block");
-		// display options to score
+	}
 
+	// Wicket Fall
+	else if (step === 6) {
+
+    	$('.batsmenList').empty(); 
+		
+		var batsman = currBatting.batsmen[currBatting.strikeBatsman];
+    	$('.batsmenList').append($('<option>', { 
+        	value: currBatting.strikeBatsman,
+        	text : batsman.name 
+    	}));
+
+    	batsman = currBatting.batsmen[currBatting.nonStrikeBatsman];
+    	$('.batsmenList').append($('<option>', { 
+        	value: currBatting.nonStrikeBatsman,
+        	text : batsman.name 
+    	}));
 	}
 }
 

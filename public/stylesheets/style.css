@@ -34,16 +34,16 @@ body {
 	background-color: #66CCFF;
 }
 
-input {
-	margin-left: auto;
-	margin-right: auto;
-	display: block;	
-}
-
 .app-window {
 	width: 100%;
 	padding: 40px 0px 40px 0px;
 	background-color: #a9a9a9;
+}
+
+input {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;	
 }
 
 .btn {
