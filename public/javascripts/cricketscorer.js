@@ -83,8 +83,8 @@ function checkIfValid(step) {
 			alert ("Team name two is not filled yet");
 			return 0;
 		}
-		else if($("#team1-radio").attr("checked") == "undefined" && $("#team2-radio").attr("checked") == "undefined") {
-			alert ("Select atleast one of the radio buttons");
+		else if($('#batting-team > button.active').val() !== '1' && $('#batting-team > button.active').val() !== '2') {
+			alert ("Select at least one of the radio buttons");
 			return 0;
 		}
 	}
