@@ -90,6 +90,12 @@ function launchStep(step){
     		}));
 		}
 	}
+
+	else if (step === 4) {
+		// Update app window contents
+		$("#step-three").remove();
+		$("#step-four").css("display", "block");
+	}
 }
 
 /*
@@ -200,14 +206,30 @@ function checkIfValid(step) {
 			wickets:"0",
 		};
 		currBowling.bowlers.push(bowler);
-		alert(bowler.name);
 		return 3;
 	}
 	
 	// Select bowler at the end of over	
 	else if(step === 3) {
-		//alert("Please select a bowler from the list.");
-		//currBowling.bowler = 
+		var bowlerName = $('.bowlerList').find(":selected").text();
+		if(bowlerName === "")
+		{
+			alert("Please select a bowler from the list.");
+			return 3;
+		}
+
+		for(var i = 0; i < currBowling.bowlers.length; i++)
+		{
+			bowler = currBowling.bowlers[i];
+			if (bowler.name === bowlerName)
+			{
+				currBowling.bowler = i;	
+				break;		
+			}
+		}
+
+		alert(currBowling.bowler);
+		return 4;
 	}
 
 	// Display score while ball is being played	
