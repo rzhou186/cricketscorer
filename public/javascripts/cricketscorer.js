@@ -351,12 +351,17 @@ function checkIfValid(step) {
 			alert("Please select the way the wicket was taken!");
 		}
 		var batsmanOut = $("#batsmanSelect > button.active").val();
+		var outMethod = $("#outMethod > button.active").val();
 		if(batsmanOut === currBatting.batsmen[currBatting.strikeBatsman].name) {
-			
+			currBatting.batsmen[currBatting.strikeBatsman].out = outMethod;
 		}
-
+		else {
+			currBatting.batsmen[currBatting.nonStrikeBatsman].out = outMethod;
+		}
 		currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
-			
+		currBowling.bowlers[currBowling.bowler].balls += 1;
+		currBatting.numBalls += 1;
+		return 2;
 	}
 
 	// Register extra run
