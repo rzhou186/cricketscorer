@@ -125,6 +125,11 @@ function launchStep(step){
 	else if (step === 5) {
 		$("#step-four").remove();
 		$("#step-five").css("display", "block");
+		$(".teamName").html(currBowling.name);
+		$(".teamScore").html(currBatting.score);
+		$(".teamWickets").html(currBatting.wickets);
+		$(".numOvers").html(currBatting.numBalls/6);
+		$(".numBalls").html(currBatting.numBalls%6);		
 	}
 
 	// Wicket Fall
