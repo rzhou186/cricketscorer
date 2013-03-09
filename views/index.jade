@@ -132,3 +132,28 @@ block content
 
 				button.next-btn.btn.btn-primary.btn-large Continue
 
+		div#step-seven(style='display:none;')
+			div.container
+
+				h3.teamName
+				p.lead <span class='teamScore'></span>
+					| /
+					| <span class='teamWickets'></span>
+					| ( <span class='numOvers'></span>.<span class='numBalls'></span> overs )
+
+				.btn-group#numRuns(data-toggle='buttons-radio', style='margin-bottom:25px')
+					button.btn(type='button', value='0', style='border-radius:0px;') 0
+					button.btn(type='button', value='1') 1
+					button.btn(type='button', value='2') 2
+					div
+					button.btn(type='button', value='3') 3
+					button.btn(type='button', value='4') 4
+					button.btn(type='button', value='5') 5
+					div
+					button.btn(type='button', value='6') 6
+				.btn-group#numRuns(data-toggle='buttons-radio', style='margin-bottom:25px')
+					button.btn(type='button', value='W', style='border-radius:0px;') Wide
+					button.btn(type='button', value='NB') No-ball
+					button.btn(type='button', value='B') Byes
+
+				button.next-btn.btn.btn-primary.btn-large Continue
