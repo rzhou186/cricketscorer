@@ -9,7 +9,7 @@ block content
 
 	div.app-window
 
-		div#step-zero(style='display:block;')
+		div#step-zero(style='display:none;')
 			div.container
 				button.next-btn.btn.btn-primary.btn-large.btn-block Get Started
 
@@ -46,7 +46,7 @@ block content
 				button.next-btn.btn.btn-primary.btn-large.btn-block Continue
 				button.endInnings.btn.btn-danger.btn-large.btn-block(style='margin-top:20px;') End Innings
 
-		div#step-three(style='display:none;')
+		div#step-three(style='display:block;')
 			div.container
 				
 				h3.teamName
@@ -55,12 +55,12 @@ block content
 					| <span class='teamWickets'></span>
 					| ( <span class='numOvers'></span>.<span class='numBalls'></span> overs )
 
-				p.lead Select Bowler
-				select(multiple='multiple', style='width:250px; height:200px')
-
 				p.lead Add New Bowler
 				div
-					input.batsmanName(type='text', placeholder='Bowler name here...')
-				button.btn.btn-primary.btn-large.btn-block Add Bowler
+					input(type='text', placeholder='Bowler name here...')
+				button.btn.btn-primary(style='margin-top:5px; margin-bottom:20px; width:220px') Add Bowler
 
-					
+				p.lead Select Bowler
+				select(multiple='multiple', style='width:250px; height:150px; margin-bottom:25px')
+
+				button.next-btn.btn.btn-primary.btn-large.btn-block Continue
