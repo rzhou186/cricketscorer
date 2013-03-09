@@ -36,6 +36,16 @@ $(document).ready(function(){
 
 });
 
+function hideAll() {
+	$("#step-one").css("display", "none");
+	$("#step-two").css("display", "none");
+	$("#step-three").css("display", "none");
+	$("#step-four").css("display", "none");
+	$("#step-five").css("display", "none");
+	$("#step-six").css("display", "none");
+	$("#step-seven").css("display", "none");
+}
+
 /*
  * Function: launchStep
  * ----------------------------------------
@@ -51,7 +61,7 @@ function launchStep(step){
  		$(".subhead-window").remove();
 
  		// Update app window contents
-		$("#step-zero").remove();
+		hideAll();
 		$("#step-one").css("display", "block");
 
 	}
@@ -59,12 +69,8 @@ function launchStep(step){
 	else if (step === 2) {
 
 		// Update app window contents
-		$("#step-one").css("display", "none");
-		$("#step-three").css("display", "none");
-		$("#step-four").css("display", "none");
-		$("#step-five").css("display", "none");
-		$("#step-six").css("display", "none");
-		$("#step-two").css("display", "block");
+		hideAll();
+		$("#step-two").css("display", "block");	
 		$(".batsmanNum").html(currBatting.batsmen.length+1);
 		$(".teamName").html(currBatting.Name);
 		$(".teamScore").html(currBatting.score);
@@ -76,11 +82,7 @@ function launchStep(step){
 
 	else if (step === 3) {
 		// Update app window contents
-		$("#step-one").css("display", "none");
-		$("#step-two").css("display", "none");
-		$("#step-four").css("display", "none");
-		$("#step-five").css("display", "none");
-		$("#step-six").css("display", "none");
+		hideAll();
 		$("#step-three").css("display", "block");	
 		$(".teamName").html(currBowling.Name);
 		$(".teamScore").html(currBatting.score);
@@ -102,11 +104,7 @@ function launchStep(step){
 
 	else if (step === 4) {
 		// Update app window contents
-		$("#step-one").css("display", "none");
-		$("#step-two").css("display", "none");
-		$("#step-three").css("display", "none");
-		$("#step-five").css("display", "none");
-		$("#step-six").css("display", "none");
+		hideAll();
 		$("#step-four").css("display", "block");
 		$(".teamName").html(currBowling.name);
 		$(".teamScore").html(currBatting.score);
@@ -133,11 +131,7 @@ function launchStep(step){
 
 	// Register score
 	else if (step === 5) {
-		$("#step-one").css("display", "none");
-		$("#step-two").css("display", "none");
-		$("#step-three").css("display", "none");
-		$("#step-four").css("display", "none");
-		$("#step-six").css("display", "none");
+		hideAll();
 		$("#step-five").css("display", "block");
 		$(".teamName").html(currBowling.name);
 		$(".teamScore").html(currBatting.score);
@@ -148,11 +142,7 @@ function launchStep(step){
 
 	// Wicket Fall
 	else if (step === 6) {
-		$("#step-one").css("display", "none");
-		$("#step-two").css("display", "none");
-		$("#step-three").css("display", "none");
-		$("#step-four").css("display", "none");
-		$("#step-five").css("display", "none");
+		hideAll();
 		$("#step-six").css("display", "block");
 		$('#batsmanOne').html(currBatting.batsmen[currBatting.strikeBatsman].name);
 		$('#batsmanTwo').html(currBatting.batsmen[currBatting.nonStrikeBatsman].name);
@@ -174,7 +164,7 @@ function launchStep(step){
 
 	// Register extras
 	else if (step === 7) {
-		$("#step-five").remove();
+		hideAll();
 		$("#step-seven").css("display", "block");
 	}
 }
@@ -393,30 +383,35 @@ function checkIfValid(step) {
 
 	// Register extra run
 	else if(step == 7) {
-		
-		if($("#extraType > button.active").val() === null) {
+		if($("#extraType > button.active").val() === undefined) {
 			alert("Please select an extra type.");
 			return 7;
 		}
 
-		if($("#numRuns > button.active").val() === null) {
+		if($("#numRuns > button.active").val() === undefined) {
 			alert("Please select additional runs scored on the extra.");
 			return 7;
 		}
 
 		var extraType = $("#extraType > button.active").val();
 		var runs = parseInt($("#numRuns > button.active").val());
+		
 		var extraRun = 1;
-		if (extraType === "Byes") {
+
+		// Count the ball if its byes and dont give extra run
+		if (extraType === "B") {
 			extraRun = 0;
 			currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
 			currBowling.bowlers[currBowling.bowler].balls += 1;
 			currBatting.numBalls += 1;
 		}
+		// Batsman score runs only if its not byes
+		else {
+			currBatting.batsmen[currBatting.strikeBatsman].runs += runs;
+			if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
+			if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;			
+		}
 
-		currBatting.batsmen[currBatting.strikeBatsman].runs += (runs + extraRun);
-		if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
-		if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
 		if (runs % 2 === 1)
 		{
 			var temp = currBatting.strikeBatsman;
@@ -432,7 +427,7 @@ function checkIfValid(step) {
 			typeOfExtra : extraType
 		};
 		currOver.push(newBall);		
-		if(currBatting.numBalls % 6 === 0) {
+		if(currBatting.numBalls % 6 === 0 && currBatting.numBalls > 0) {
 			var temp = currBatting.strikeBatsman;
 			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 			currBatting.nonStrikeBatsman = temp;		
