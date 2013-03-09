@@ -410,7 +410,7 @@ function checkIfValid(step) {
 		currBatting.score += (runs + extraRun);
 		var newBall = {
 			runs : runs,
-			ballType : "E"
+			ballType : "E",
 			typeOfExtra : extraType
 		};
 		currOver.push(newBall);		
