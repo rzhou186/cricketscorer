@@ -83,10 +83,12 @@ function checkIfValid(step) {
 		teamOne.Name = $("#team1-name").val();
 		teamTwo.Name = $("#team2-name").val();
 		if($("#battingTeam > button.active").val() === '1') {
-		currBatting = teamOne;
+			currBatting = teamOne;
+			currBowling = teamTwo;
 		}
 		else {
-		currBatting = teamTwo;
+			currBatting = teamTwo;
+			currBowling = teamOne;
 		}
 		if(teamOne.Name === "") {
 			alert ("Team name one is not filled yet");
@@ -148,34 +150,55 @@ function checkIfValid(step) {
 		{
 			return 2;
 		}
+		else if (currBatting.numBalls % 6 === 0)
+		{
+			return 4;
+		}
 		else
 		{
-			return 3;
+			return 5;
 		}
 		//alert(batsman.name);
 	}
 
-	// End ball and register score	
+	// Add bowler	
 	else if(step === 3) {
 
+		var bowlerName = $(".bowlerName").val();
+
+		if(bowlerName === "") {
+			alert("Please enter new bowler name");
+			return 3;
+		}
+
+		// Create a new bowler
+		var bowler = {
+			name:bowlerName,
+			runs:"0",
+			overs:"0",
+			wickets:"0",
+		};
+		currBowling.bowlers.push(bowler);
+
+		return 4;
 	}
 	
-	// Display score while ball is being played	
+	// Select bowler at the end of over	
 	else if(step === 4) {
 
 	}
-	
-	// Add or select bowler at the end of over
+
+	// Display score while ball is being played	
 	else if(step === 5) {
 
 	}
 
-	// Register how wicket fell
+	// End ball and register score
 	else if(step == 6) {
 
 	}
 
-	// Register the type of extra run scored
+	// Register how wicket fell
 	else if(step == 7) {
 
 	}

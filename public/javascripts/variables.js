@@ -8,6 +8,7 @@
 var currStep = 0;
 
 var currBatting;
+var currBowling;
 
 // Team One
 
