@@ -9,24 +9,30 @@ block content
 
 	div.app-window
 
-		div#step-zero
+		div#step-zero(style='display: block;')
 			div.container
 				button.next-btn.btn.btn-primary.btn-large.btn-block Get Started
 
 		div#step-one(style='display: none;')
 			div.container
-				h1 Step One
-				p TEAM ONE
+				h3 Team One
 				input#team1-name(type='text', placeholder='Team name here...')
-				p TEAM TWO
+				h3 Team Two
 				input#team2-name(type='text', placeholder='Team name here...')
-				p Which team will bat first?
-
+				p.lead Which team is batting first?
+				div#batting-team.btn-group(data-toggle='buttons-radio', style='margin-bottom: 20px;')
+					button.btn.btn-info(type='button', value='1') Team 1
+					button.btn.btn-info(type='button', value='2') Team 2
 				button.next-btn.btn.btn-primary.btn-large.btn-block Continue
 
 		div#step-two(style='display: none;')
 			div.container
-				p STEP TWO YAY
+				h3 Team One
+				p.lead
+					| <span>167</span>/
+					| <span>0</span>
+					| &nbsp;&nbsp;&nbsp;
+					| <span>8.3</span> overs
 				button.next-btn.btn.btn-primary.btn-large.btn-block Continue
 
 		div#step-three(style='display: none;')
