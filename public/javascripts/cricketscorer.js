@@ -307,7 +307,6 @@ function checkIfValid(step) {
 	// End ball and register score
 	else if(step == 5) {
 		var ballOutcome = $("#ballOutcome > button.active").val();
-		alert(ballOutcome);
 		if(ballOutcome === null) {
 			alert("Please select a ball outcome.");
 			return 5;
@@ -318,7 +317,7 @@ function checkIfValid(step) {
 		else if(ballOutcome === 'extra') {
 			return 7;
 		}
-		else if(parseInt($("#ballOutcome > button.active").val()) <= 6) {
+		else if(parseInt(ballOutcome) <= 6) {
 			var runs = parseInt($("#ballOutcome > button.active").val());
 			currBatting.batsmen[currBatting.strikeBatsman].runs += runs;
 			currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
@@ -363,9 +362,11 @@ function checkIfValid(step) {
 		var outMethod = $("#outMethod > button.active").val();
 		if(batsmanOut === currBatting.batsmen[currBatting.strikeBatsman].name) {
 			currBatting.batsmen[currBatting.strikeBatsman].out = outMethod;
+			currBatting.strikeBatsman = -1;
 		}
 		else {
 			currBatting.batsmen[currBatting.nonStrikeBatsman].out = outMethod;
+			currBatting.nonStrikeBatsman = -1;
 		}
 		currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
 		currBowling.bowlers[currBowling.bowler].balls += 1;
