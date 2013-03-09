@@ -29,12 +29,14 @@ body {
 }
 
 .subhead-window {
-	padding: 80px 80px 80px 80px;
+	width: 100%;
+	padding: 80px 0px 80px 0px;
 	background-color: #66CCFF;
 }
 
 .app-window {
-	padding: 40px 80px 40px 80px;
+	width: 100%;
+	padding: 40px 0px 40px 0px;
 	background-color: #a9a9a9;
 }
 
