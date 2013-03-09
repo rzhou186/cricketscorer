@@ -376,30 +376,35 @@ function checkIfValid(step) {
 
 	// Register extra run
 	else if(step == 7) {
-		
-		if($("#extraType > button.active").val() === null) {
+		if($("#extraType > button.active").val() === undefined) {
 			alert("Please select an extra type.");
 			return 7;
 		}
 
-		if($("#numRuns > button.active").val() === null) {
+		if($("#numRuns > button.active").val() === undefined) {
 			alert("Please select additional runs scored on the extra.");
 			return 7;
 		}
 
 		var extraType = $("#extraType > button.active").val();
 		var runs = parseInt($("#numRuns > button.active").val());
+		
 		var extraRun = 1;
-		if (extraType === "Byes") {
+
+		// Count the ball if its byes and dont give extra run
+		if (extraType === "B") {
 			extraRun = 0;
 			currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
 			currBowling.bowlers[currBowling.bowler].balls += 1;
 			currBatting.numBalls += 1;
 		}
+		// Batsman score runs only if its not byes
+		else {
+			currBatting.batsmen[currBatting.strikeBatsman].runs += runs;
+			if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
+			if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;			
+		}
 
-		currBatting.batsmen[currBatting.strikeBatsman].runs += (runs + extraRun);
-		if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
-		if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
 		if (runs % 2 === 1)
 		{
 			var temp = currBatting.strikeBatsman;
