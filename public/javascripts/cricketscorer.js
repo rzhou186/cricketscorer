@@ -339,6 +339,9 @@ function checkIfValid(step) {
 
 			currOver.push(newBall);
 			if(currBatting.numBalls % 6 === 0) {
+				var temp = currBatting.strikeBatsman;
+				currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
+				currBatting.nonStrikeBatsman = temp;				
 				return 3;
 			}
 			return 4;
@@ -401,7 +404,7 @@ function checkIfValid(step) {
 		if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
 		if (runs % 2 === 1)
 		{
-			var temp = currBatting.nonStrikeBatsman;
+			var temp = currBatting.strikeBatsman;
 			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 			currBatting.nonStrikeBatsman = temp;
 		}
@@ -415,7 +418,7 @@ function checkIfValid(step) {
 		};
 		currOver.push(newBall);		
 		if(currBatting.numBalls % 6 === 0) {
-			var temp = currBatting.nonStrikeBatsman;
+			var temp = currBatting.strikeBatsman;
 			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 			currBatting.nonStrikeBatsman = temp;		
 			return 3;
