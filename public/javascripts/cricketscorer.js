@@ -36,7 +36,7 @@ $(document).ready(function(){
 
 });
 
-function hideAll {
+function hideAll() {
 	$("#step-one").css("display", "none");
 	$("#step-two").css("display", "none");
 	$("#step-three").css("display", "none");
