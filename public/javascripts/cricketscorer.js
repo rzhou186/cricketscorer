@@ -131,7 +131,7 @@ function launchStep(step){
 	else if (step === 6) {
 		$("#step-five").remove();
 		$("#step-six").css("display", "block");
-		
+
     	$('.batsmenList').empty(); 
 		
 		var batsman = currBatting.batsmen[currBatting.strikeBatsman];
@@ -344,6 +344,15 @@ function checkIfValid(step) {
 	// Register extra run
 	else if(step == 7) {
 		
+		if($("#extraType > button.active").val() === null) {
+			alert("Please select an extra type.");
+			return 7;
+		}
+
+		if($("#numRuns > button.active").val() === null) {
+			alert("Please select additional runs scored on the extra.");
+			return 7;
+		}					
 	}
 
 	return 1;
