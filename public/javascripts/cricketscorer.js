@@ -11,7 +11,7 @@ $(document).ready(function(){
 
  	$(".next-btn").click(function(){
  		// Increment currStep, then launch the next step.
- 		checkifValid(currStep);
+ 		checkIfValid(currStep);
  		currStep++;
  		launchStep(currStep);
  	});
@@ -55,7 +55,13 @@ function launchStep(step){
 
 }
 
-function checkifValid(step) {
+/*
+ * Function: checkIfValid
+ * ----------------------------------------
+ * Checks that all form fields are filled before proceeding to the next step.
+ * 
+ */
+function checkIfValid(step) {
 	if(step === 1)
 	{
 		teamOne.Name = $("#team1-name").val();
