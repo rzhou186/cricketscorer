@@ -130,19 +130,24 @@ function launchStep(step){
 	// Wicket Fall
 	else if (step === 6) {
 
-    	$('.batsmenList').empty(); 
+		$("step-five").remove();
+		$("step-six").css("display", "block");
+		$('#batsmanOne').html(currBatting.batsmen[currBatting.strikeBatsman].name);
+		$('#batsmanTwo').html(currBatting.batsmen[currBatting.nonStrikeBatsman].name);
+
+    	/*$('.batsmenList').empty(); 
 		
 		var batsman = currBatting.batsmen[currBatting.strikeBatsman];
     	$('.batsmenList').append($('<option>', { 
         	value: currBatting.strikeBatsman,
-        	text : batsman.name 
+        	text : batsman.name, 
     	}));
 
     	batsman = currBatting.batsmen[currBatting.nonStrikeBatsman];
     	$('.batsmenList').append($('<option>', { 
         	value: currBatting.nonStrikeBatsman,
-        	text : batsman.name 
-    	}));
+        	text : batsman.name, 
+    	}));*/
 	}
 }
 
@@ -330,7 +335,20 @@ function checkIfValid(step) {
 
 	// Register how wicket fell
 	else if(step == 6) {
+		if($("#batsmanSelect > button.active").val() === null) {
+			alert("Please select a batsman!");
+			return 6;
+		}
+		if($("#outMethod > button.active").val() === null) {
+			alert("Please select the way the wicket was taken!");
+		}
+		var batsmanOut = $("#batsmanSelect > button.active").val();
+		if(batsmanOut === currBatting.batsmen[currBatting.strikeBatsman].name) {
+			
+		}
 
+		currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
+			
 	}
 
 	// Register extra run
