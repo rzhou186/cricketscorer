@@ -9,7 +9,7 @@ block content
 
 	div.app-window
 
-		div#step-zero(style='display:none;')
+		div#step-zero(style='display:display;')
 			div.container
 				button.next-btn.btn.btn-primary.btn-large.btn-block Get Started
 
@@ -25,14 +25,14 @@ block content
 					button.btn.btn-info(type='button', value='2') Team 2
 				button.next-btn.btn.btn-primary.btn-large.btn-block Continue
 
-		div#step-two(style='display:block;')
+		div#step-two(style='display:none;')
 			div.container
 				h3.teamName Team One
 				p.lead
 					| <span class='teamScore'></span>
 					| /
 					| <span class='teamWickets'></span>
-					| (<span class=''></span> overs)
+					| (<span class='numOvers'></span>.<span class='numBalls'></span> overs)
 				button.next-btn.btn.btn-primary.btn-large.btn-block Continue
 
 		div#step-three(style='display:none;')
