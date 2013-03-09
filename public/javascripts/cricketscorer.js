@@ -319,6 +319,32 @@ function checkIfValid(step) {
 
 	// End ball and register score
 	else if(step == 5) {
+		if($("#ballOutcome > button.active").val() === '') {
+			alert("Please select a ball outcome.");
+			return 5;
+		}
+		else if($("#ballOutcome > button.active").val() === 'wicket') {
+			return 6;		
+		}
+		else if($("#ballOutcome > button.active").val() === 'extra') {
+			return 7;
+		}
+		else if(parseInt($("#ballOutcome > button.active").val()) <= 6) {
+			runs = parseInt($("#ballOutcome > button.active").val());
+			currBatting.batsmen[strikeBatsman].runs += runs;
+			currBatting.batsmen[strikeBatsman].balls += 1;
+			if (runs % 2 === 1)
+			{
+				temp = nonStrikeBatsman;
+				strikeBatsman = nonStrikeBatsman;
+				nonStrikeBatsman = temp;
+			}
+			currBowling.bowlers[bowler].runs += runs;
+			currBowling.bowlers[bowler].balls += 1;
+
+			currBatting.score += runs;
+			currBatting.numBalls += 1;
+		}		
 
 	}
 
@@ -327,7 +353,7 @@ function checkIfValid(step) {
 
 	}
 
-	// End Innings
+	// Register extra run
 	else if(step == 7) {
 		
 	}
