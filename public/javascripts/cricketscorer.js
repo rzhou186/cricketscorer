@@ -32,6 +32,11 @@ $(document).ready(function(){
  	// End Innings
  	$(".endInnings").click(function(){
 
+ 		var temp = currBatting;
+ 		currBatting = currBowling;
+ 		currBowling = temp;
+ 		currStep = 2;
+ 		launchStep(currStep);
  	});
 
 });
@@ -85,9 +90,10 @@ function launchStep(step){
 		// Update app window contents
 		hideAll();
 		$("#step-three").css("display", "block");	
-		$(".teamName").html(currBowling.Name);
+		$(".teamName").html(currBatting.Name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
+		$(".bowlingName").html(currBowling.Name);
 		$(".numOvers").html(Math.floor(currBatting.numBalls/6));
 		$(".numBalls").html(currBatting.numBalls%6);
 		$(".bowlerName").val("");
@@ -107,7 +113,7 @@ function launchStep(step){
 		// Update app window contents
 		hideAll();
 		$("#step-four").css("display", "block");
-		$(".teamName").html(currBowling.name);
+		$(".teamName").html(currBatting.name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
 		$(".numOvers").html(Math.floor(currBatting.numBalls/6));
@@ -134,7 +140,7 @@ function launchStep(step){
 	else if (step === 5) {
 		hideAll();
 		$("#step-five").css("display", "block");
-		$(".teamName").html(currBowling.name);
+		$(".teamName").html(currBatting.name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
 		$(".numOvers").html(Math.floor(currBatting.numBalls/6));
@@ -357,11 +363,11 @@ function checkIfValid(step) {
 
 	// Register how wicket fell
 	else if(step == 6) {
-		if($("#batsmanSelect > button.active").val() === null) {
+		if($("#batsmanSelect > button.active").val() === undefined) {
 			alert("Please select a batsman!");
 			return 6;
 		}
-		if($("#outMethod > button.active").val() === null) {
+		if($("#outMethod > button.active").val() === undefined) {
 			alert("Please select the way the wicket was taken!");
 			return 6;
 		}
