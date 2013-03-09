@@ -54,12 +54,13 @@ block content
 					| /
 					| <span class='teamWickets'></span>
 					| ( <span class='numOvers'></span>.<span class='numBalls'></span> overs )
-				
-				p.lead Select Bowler
-				select(multiple='multiple', style='width:250px;')
-					option 1
-					option 2
-					option 3
-					option 4
-					option 5
 
+				p.lead Select Bowler
+				select(multiple='multiple', style='width:250px; height:200px')
+
+				p.lead Add New Bowler
+				div
+					input.batsmanName(type='text', placeholder='Bowler name here...')
+				button.btn.btn-primary.btn-large.btn-block Add Bowler
+
+					
