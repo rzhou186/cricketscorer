@@ -415,7 +415,7 @@ function checkIfValid(step) {
 			typeOfExtra : extraType
 		};
 		currOver.push(newBall);		
-		if(currBatting.numBalls % 6 === 0) {
+		if(currBatting.numBalls % 6 === 0 && currBatting.numBalls > 0) {
 			var temp = currBatting.strikeBatsman;
 			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 			currBatting.nonStrikeBatsman = temp;		
