@@ -11,9 +11,12 @@ $(document).ready(function(){
 
  	$(".next-btn").click(function(){
  		// Increment currStep, then launch the next step.
- 		checkifValid(currStep);
- 		currStep++;
- 		launchStep(currStep);
+ 		var status = checkifValid(currStep);
+ 		if(status > 0)
+ 		{
+ 			currStep++;
+ 			launchStep(currStep);
+ 		}
  	});
 
 });
@@ -68,12 +71,15 @@ function checkifValid(step) {
 		}
 		if(teamOne.Name === "") {
 			alert ("Team name one is not filled yet");
+			return 0;
 		}
 		else if(teamTwo.Name === "") {
 			alert ("Team name two is not filled yet");
+			return 0;
 		}
 		else if($("#team1-radio").attr("checked") == "undefined" && $("#team2-radio").attr("checked") == "undefined") {
 			alert ("Select atleast one of the radio buttons");
+			return 0;
 		}
 	}
 	else if(step === 2) {
@@ -81,6 +87,9 @@ function checkifValid(step) {
 		$(".teamScore").val(currBatting.score);
 		$(".teamWickets").val(currBatting.wickets);
 	}
+	
+	// All checks successful
+	return 1;
 }
 
 
