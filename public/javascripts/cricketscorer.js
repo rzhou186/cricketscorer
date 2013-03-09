@@ -108,6 +108,14 @@ function launchStep(step){
 		$(".strikeBatsmanRuns").html(currBatting.batsmen[currBatting.strikeBatsman].runs);
 		$(".nonStrikeBatsmanRuns").html(currBatting.batsmen[currBatting.nonStrikeBatsman].runs);
 		$(".bowler").html(currBowling.bowlers[currBatting.bowler].Name);
+		for(var i = 0; i < 6; i++) {
+			if(currOver[i] !== -1) {
+				$(".ball" + i).html(currOver[i]);
+			}
+			else {
+				$(".ball" + i).html("");
+			}
+		}
 		if(currOver[0] !== -1) {
 			$(".ball1").html(currOver[0]);
 		}
