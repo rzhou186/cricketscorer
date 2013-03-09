@@ -323,7 +323,7 @@ function checkIfValid(step) {
 			if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
 			if (runs % 2 === 1)
 			{
-				var temp = currBatting.nonStrikeBatsman;
+				var temp = currBatting.StrikeBatsman;
 				currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 				currBatting.nonStrikeBatsman = temp;
 			}
