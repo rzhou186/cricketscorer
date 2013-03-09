@@ -89,7 +89,7 @@ function checkIfValid(step) {
 		}
 	}
 	else if(step === 2) {
-		// this is step 2
+
 		$(".teamName").val(currBatting.Name);
 		$(".teamScore").val(currBatting.score);
 		$(".teamWickets").val(currBatting.wickets);
