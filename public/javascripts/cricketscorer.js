@@ -194,7 +194,7 @@ function checkIfValid(step) {
 			return 1;
 		}
 		else if($('#battingTeam > button.active').val() !== '1' && $('#battingTeam > button.active').val() !== '2') {
-			alert ("Select at least one of the radio buttons");
+			alert ("Select the team that will bat first.");
 			return 1;
 		}
 
