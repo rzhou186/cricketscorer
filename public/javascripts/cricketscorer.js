@@ -96,9 +96,16 @@ function checkIfValid(step) {
 		$(".numOvers").val(currBatting.numBalls/6);
 		$(".numBalls").val(currBatting.numBalls%6);
 
+		var batsmanName = $(".batsmanName").val();
+
+		if(batsmanName === "") {
+			alert("Please enter batsman name");
+			return 0;
+		}
+
 		// Create a new batsman
 		var batsman = {
-			name:$(".batsmanName").val(),
+			name:batsmanName,
 			runs:"0",
 			out:"not out",
 			fours:"0",

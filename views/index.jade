@@ -9,7 +9,7 @@ block content
 
 	div.app-window
 
-		div#step-zero(style='display:block;')
+		div#step-zero(style='display:none;')
 			div.container
 				button.next-btn.btn.btn-primary.btn-large.btn-block Get Started
 
@@ -27,12 +27,12 @@ block content
 
 		div#step-two(style='display:block;')
 			div.container
-				h3 Team One
+				h3.teamName Team One
 				p.lead
-					| <span>167</span>/
-					| <span>0</span>
-					| &nbsp;&nbsp;&nbsp;
-					| <span>8.3</span> overs
+					| <span class='teamScore'></span>
+					| /
+					| <span class='teamWickets'></span>
+					| (<span class=''></span> overs)
 				button.next-btn.btn.btn-primary.btn-large.btn-block Continue
 
 		div#step-three(style='display:none;')
