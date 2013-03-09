@@ -211,18 +211,16 @@ function checkIfValid(step) {
 		}
 
 		if($("#onStrike > button.active").val() === 'yes') {
-			currBatting.strikeBatsman = currBatting.batsmen.length;
-			if (currBatting.batsmen.length > 0 && currBatting.nonStrikeBatsman < 0)
+			if(currentBatting.strikeBatsman > 0)
 			{
-				alert("At least one batsman must be on non-strike.");
-				return 2;
-			}			
+				currBatting.nonStrikeBatsman = current.strikeBatsman;
+			}
+			currBatting.strikeBatsman = currBatting.batsmen.length;			
 		}
 		else if($("#onStrike > button.active").val() === 'no') {
-			if (currBatting.batsmen.length > 0 && currBatting.strikeBatsman < 0)
+			if(currentBatting.nonStrikeBatsman > 0)
 			{
-				alert("At least one batsman must be on strike.");
-				return 2;
+				currBatting.strikeBatsman = current.nonStrikeBatsman;
 			}
 			currBatting.nonStrikeBatsman = currBatting.batsmen.length;
 		}
