@@ -19,6 +19,11 @@ $(document).ready(function(){
  		}
  	});
 
+ 	// Add Bowler
+ 	$(".addBowler").click(function(){
+ 		checkIfValid(4);
+ 	});
+
  	// End Innings
  	$(".endInnings").click(function(){
 
@@ -64,8 +69,14 @@ function launchStep(step){
 	else if (step === 3) {
 		// Update app window contents
 		$("#step-two").remove();
-		$("#step-three").css("display", "block");		
+		$("#step-three").css("display", "block");	
 
+		$(".teamName").html(currBowling.Name);
+		$(".teamScore").html(currBatting.score);
+		$(".teamWickets").html(currBatting.wickets);
+		$(".numOvers").html(currBatting.numBalls/6);
+		$(".numBalls").html(currBatting.numBalls%6);
+		$(".bowlerName").val("");	
 	}
 
 }
@@ -152,17 +163,17 @@ function checkIfValid(step) {
 		}
 		else if (currBatting.numBalls % 6 === 0)
 		{
-			return 4;
+			return 3;
 		}
 		else
 		{
-			return 5;
+			return 4;
 		}
 		//alert(batsman.name);
 	}
 
 	// Add bowler	
-	else if(step === 3) {
+	else if(step === 100) {
 
 		var bowlerName = $(".bowlerName").val();
 
@@ -184,27 +195,27 @@ function checkIfValid(step) {
 	}
 	
 	// Select bowler at the end of over	
-	else if(step === 4) {
+	else if(step === 3) {
 
 	}
 
 	// Display score while ball is being played	
-	else if(step === 5) {
+	else if(step === 4) {
 
 	}
 
 	// End ball and register score
-	else if(step == 6) {
+	else if(step == 5) {
 
 	}
 
 	// Register how wicket fell
-	else if(step == 7) {
+	else if(step == 6) {
 
 	}
 
 	// End Innings
-	else if(step == 8) {
+	else if(step == 7) {
 		
 	}
 
