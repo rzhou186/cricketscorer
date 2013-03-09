@@ -92,3 +92,28 @@ block content
 					| <strong>Bowler:</strong> <span class="bowler"></span>
 				p.overRecord.lead
 				button.next-btn.btn.btn-success.btn-large PLAY BALL
+
+		div#step-five(style='display:none;')
+			div.container
+
+				h3.teamName
+				p.lead <span class='teamScore'></span>
+					| /
+					| <span class='teamWickets'></span>
+					| ( <span class='numOvers'></span>.<span class='numBalls'></span> overs )
+
+				.btn-group#ballOutcome(data-toggle='buttons-radio', style='margin-bottom:20px')
+					button.btn(type='button', value='0', style='border-radius:0px;') 0
+					button.btn(type='button', value='1') 1
+					button.btn(type='button', value='2') 2
+					div
+					button.btn(type='button', value='3') 3
+					button.btn(type='button', value='4') 4
+					button.btn(type='button', value='5') 5
+					div
+					button.btn(type='button', value='6') 6
+					button.btn(type='button', value='wicket', style='padding-left:35px; padding-right:34px;' ) W
+					button.btn(type='button', value='extra', style='border-radius:0px; padding-left:31px; padding-right:32px;') Ex
+
+				button.next-btn.btn.btn-primary.btn-large Continue
+
