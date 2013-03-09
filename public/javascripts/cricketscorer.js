@@ -51,6 +51,7 @@ function launchStep(step){
 		// Update app window contents
 		$("#step-one").remove();
 		$("#step-two").css("display", "block");	
+		$(".batsmanNum").html(currBatting.batsmen.length+1);
 		$(".teamName").html(currBatting.Name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
@@ -80,7 +81,7 @@ function checkIfValid(step) {
 	{
 		teamOne.Name = $("#team1-name").val();
 		teamTwo.Name = $("#team2-name").val();
-		if($("#batting-team > button.active").val() === '1') {
+		if($("#battingTeam > button.active").val() === '1') {
 		currBatting = teamOne;
 		}
 		else {
@@ -94,7 +95,7 @@ function checkIfValid(step) {
 			alert ("Team name two is not filled yet");
 			return 0;
 		}
-		else if($('#batting-team > button.active').val() !== '1' && $('#batting-team > button.active').val() !== '2') {
+		else if($('#battingTeam > button.active').val() !== '1' && $('#battingTeam > button.active').val() !== '2') {
 			alert ("Select at least one of the radio buttons");
 			return 0;
 		}
@@ -110,8 +111,14 @@ function checkIfValid(step) {
 		}
 
 		if($("#onStrike > button.active").val() === 'yes') {
-			currBatting.strikeBatsman = currBatting.batsmen.length();
+			currBatting.strikeBatsman = currBatting.batsmen.length;
 		}
+		else if (currBatting.batsmen.length > 0 && currBatting.strikeBatsman < 0)
+		{
+			alert("At least one batsman must be on strike.");
+			return 0;
+		}
+
 
 		// Create a new batsman
 		var batsman = {
@@ -122,8 +129,10 @@ function checkIfValid(step) {
 			sixes:"0"
 		};
 		currBatting.batsmen.push(batsman);
+
+		//alert(batsman.name);
 	}
-	
+
 	// End ball and register score	
 	else if(step === 3) {
 
