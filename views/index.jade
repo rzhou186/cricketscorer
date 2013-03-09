@@ -63,3 +63,32 @@ block content
 
 				button.next-btn.btn.btn-primary.btn-large Continue
 				button.endInnings.btn.btn-danger.btn-large(style='margin-top:20px;') End Innings
+
+		div#step-four(style='display:none;')
+			div.container
+
+				h3.teamName
+				p.lead <span class='teamScore'></span>
+					| /
+					| <span class='teamWickets'></span>
+					| ( <span class='numOvers'></span>.<span class='numBalls'></span> overs )
+
+				table.table
+					thead
+						tr
+							th
+							th.lead Batsman
+							th.lead Runs
+					tbody
+						tr
+							td <i class="icon-arrow-right"></i>
+							td.strikeBatsman
+							td.strikeBatsmanRB
+						tr
+							td
+							td.nonStrikeBatsman
+							td.nonStrikeBatsmanRB
+				p.lead
+					| <strong>Bowler:</strong> <span class="bowler"></span>
+				p.overRecord.lead
+				button.next-btn.btn.btn-success.btn-large PLAY BALL
