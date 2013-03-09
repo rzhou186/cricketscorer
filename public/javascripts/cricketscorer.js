@@ -129,6 +129,8 @@ function launchStep(step){
 
 	// Wicket Fall
 	else if (step === 6) {
+		$("#step-five").remove();
+		$("#step-six").css("display", "block");
 
 		$("step-five").remove();
 		$("step-six").css("display", "block");
@@ -148,6 +150,12 @@ function launchStep(step){
         	value: currBatting.nonStrikeBatsman,
         	text : batsman.name, 
     	}));*/
+	}
+
+	// Register extras
+	else if (step === 7) {
+		$("#step-five").remove();
+		$("#step-seven").css("display", "block");
 	}
 }
 
@@ -354,6 +362,48 @@ function checkIfValid(step) {
 	// Register extra run
 	else if(step == 7) {
 		
+		if($("#extraType > button.active").val() === null) {
+			alert("Please select an extra type.");
+			return 7;
+		}
+
+		if($("#numRuns > button.active").val() === null) {
+			alert("Please select additional runs scored on the extra.");
+			return 7;
+		}
+
+		var extraType = $("#extraType > button.active").val();
+		var runs = parseInt($("#numRuns > button.active").val());
+		var extraRun = 1;
+		if (extraType === "Byes") {
+			extraRun = 0;
+			currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
+			currBowling.bowlers[currBowling.bowler].balls += 1;
+			currBatting.numBalls += 1;
+		}
+
+		currBatting.batsmen[currBatting.strikeBatsman].runs += (runs + extraRun);
+		if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
+		if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
+		if (runs % 2 === 1)
+		{
+			var temp = currBatting.nonStrikeBatsman;
+			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
+			currBatting.nonStrikeBatsman = temp;
+		}
+		currBowling.bowlers[currBowling.bowler].runs += (runs + extraRun);
+
+		currBatting.score += (runs + extraRun);
+		var newBall = {
+			runs : runs,
+			ballType : extraType,
+		};
+		currOver.push(newBall);		
+		if(currBatting.numBalls % 6 === 0) {
+			return 3;
+		}
+
+		return 4;
 	}
 
 	return 1;
