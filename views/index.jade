@@ -5,11 +5,11 @@ block content
 	div.subhead-window
 		div.container
 			h1 CricketScorer
-			p.lead Sleek and powerful framework for easy web development.
+			p.lead Sleek and powerful framework for easy cricket scorekeeping.
 
 	div.app-window
 
-		div#step-zero(style='display:display;')
+		div#step-zero(style='display:none;')
 			div.container
 				button.next-btn.btn.btn-primary.btn-large.btn-block Get Started
 
@@ -22,18 +22,19 @@ block content
 				input#team2-name(type='text', placeholder='Team name here...')
 				p.lead Which team is batting first?
 				div#battingTeam.btn-group(data-toggle='buttons-radio', style='margin-bottom:20px;')
-					button.btn(type='button', value='1') Team 1
-					button.btn(type='button', value='2') Team 2
+					button.btn(type='button', value='1') Team One
+					button.btn(type='button', value='2') Team Two
 				button.next-btn.btn.btn-primary.btn-large.btn-block Continue
 
 		div#step-two(style='display:none;')
 			div.container
 
-				h3.teamName Team One
+				h3.teamName
 				p.lead <span class='teamScore'></span>
 					| /
 					| <span class='teamWickets'></span>
 					| ( <span class='numOvers'></span>.<span class='numBalls'></span> overs )
+				
 				p.lead Enter Batsman
 					| <span class='batsmanNum'></span>
 				div
@@ -45,6 +46,20 @@ block content
 				button.next-btn.btn.btn-primary.btn-large.btn-block Continue
 				button.endInnings.btn.btn-danger.btn-large.btn-block(style='margin-top:20px;') End Innings
 
-		div#step-three(style='display:none;')
+		div#step-three(style='display:display;')
 			div.container
-				p STEP THREE YAY
+				
+				h3.teamName
+				p.lead <span class='teamScore'></span>
+					| /
+					| <span class='teamWickets'></span>
+					| ( <span class='numOvers'></span>.<span class='numBalls'></span> overs )
+				
+				p.lead Select Bowler
+				select(multiple='multiple', style='width:250px;')
+					option 1
+					option 2
+					option 3
+					option 4
+					option 5
+
