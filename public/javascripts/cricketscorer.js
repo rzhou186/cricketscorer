@@ -69,7 +69,7 @@ function checkIfValid(step) {
 	{
 		teamOne.Name = $("#team1-name").val();
 		teamTwo.Name = $("#team2-name").val();
-		if($("#team1-radio").attr("checked") != "undefined") {
+		if($("#batting-team > button.active").val() === '1') {
 		currBatting = teamOne;
 		}
 		else {
@@ -89,14 +89,21 @@ function checkIfValid(step) {
 		}
 	}
 	else if(step === 2) {
-		// this is step 2
+
 		$(".teamName").val(currBatting.Name);
 		$(".teamScore").val(currBatting.score);
 		$(".teamWickets").val(currBatting.wickets);
 
+		var batsmanName = $(".batsmanName").val();
+
+		if(batsmanName === "") {
+			alert("Please enter batsman name");
+			return 0;
+		}
+
 		// Create a new batsman
 		var batsman = {
-			name:$(".batsmanName").val(),
+			name:batsmanName,
 			runs:"0",
 			out:"not out",
 			fours:"0",
