@@ -112,8 +112,8 @@ function launchStep(step){
 		$(".numBalls").html(currBatting.numBalls%6);
 		$(".strikeBatsman").html(currBatting.batsmen[currBatting.strikeBatsman].Name);
 		$(".nonStrikeBatsman").html(currBatting.batsmen[currBatting.nonStrikeBatsman].Name);
-		$(".strikeBatsmanRuns").html(currBatting.batsmen[currBatting.strikeBatsman].runs);
-		$(".nonStrikeBatsmanRuns").html(currBatting.batsmen[currBatting.nonStrikeBatsman].runs);
+		$(".strikeBatsmanRB").html(currBatting.batsmen[currBatting.strikeBatsman].runs + " (" + currBatting.batsmen[currBatting.strikeBatsman].balls + ")");
+	    $(".nonStrikeBatsmanRB").html(currBatting.batsmen[currBatting.nonStrikeBatsman].runs + " ("  + currBatting.batsmen[currBatting.nonStrikeBatsman].balls + ")");
 		$(".bowler").html(currBowling.bowlers[currBatting.bowler].Name);
 		for(var i = 0; i < 6; i++) {
 			if(currOver[i] !== -1) {
@@ -159,6 +159,13 @@ function launchStep(step){
 		else {
 			$(".ball6").html("");
 		}
+	}
+
+	else if (step == 5) {
+		$("#step-four").remove();
+		$("#step-five").css("display", "block");
+		// display options to score
+
 	}
 }
 
@@ -303,6 +310,10 @@ function checkIfValid(step) {
 
 	// End ball and register score
 	else if(step == 5) {
+		currBatting.numBalls++;
+		currBatting.batsmen[currBatting.strikeBatsman].balls++;
+		
+		//currBowling.bowlers[currBowling.bowler]
 
 	}
 
