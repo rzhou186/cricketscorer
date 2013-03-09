@@ -58,18 +58,18 @@ function launchStep(step){
 function checkifValid(step) {
 	if(step === 1)
 	{
-		teamOne.Name = $("#team1-name").val;
-		teamTwo.Name = $("#team2-name").val;
+		teamOne.Name = $("#team1-name").val();
+		teamTwo.Name = $("#team2-name").val();
 		if($("#team1-radio").attr("checked") != "undefined") {
 		currBatting = teamOne;
 		}
 		else {
 		currBatting = teamTwo;
 		}
-		if($(teamOne.Name === "") {
+		if(teamOne.Name === "") {
 			alert ("Team name one is not filled yet");
 		}
-		else if($(teamTwo.Name === "") {
+		else if(teamTwo.Name === "") {
 			alert ("Team name two is not filled yet");
 		}
 		else if($("#team1-radio").attr("checked") == "undefined" && $("#team2-radio").attr("checked") == "undefined") {

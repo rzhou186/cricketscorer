@@ -17,10 +17,12 @@ block content
 			div.container
 				h1 Step One
 				p TEAM ONE
-				input(type='text', placeholder='Team name here...')
+				input#team1-name(type='text', placeholder='Team name here...')
 				p TEAM TWO
-				input(type='text', placeholder='Team name here...')
-				button.next-btn.btn.btn-primary.btn-large.btn-block(style='margin-top: 10px') Continue
+				input#team2-name(type='text', placeholder='Team name here...')
+				p Which team will bat first?
+
+				button.next-btn.btn.btn-primary.btn-large.btn-block Continue
 
 		div#step-two(style='display: none;')
 			div.container
