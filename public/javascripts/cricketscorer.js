@@ -129,7 +129,9 @@ function launchStep(step){
 
 	// Wicket Fall
 	else if (step === 6) {
-
+		$("#step-five").remove();
+		$("#step-six").css("display", "block");
+		
     	$('.batsmenList').empty(); 
 		
 		var batsman = currBatting.batsmen[currBatting.strikeBatsman];
@@ -143,6 +145,12 @@ function launchStep(step){
         	value: currBatting.nonStrikeBatsman,
         	text : batsman.name 
     	}));
+	}
+
+	// Register extras
+	else if (step === 7) {
+		$("#step-five").remove();
+		$("#step-seven").css("display", "block");
 	}
 }
 
