@@ -411,7 +411,7 @@ function checkIfValid(step) {
 		var newBall = {
 			runs : runs,
 			ballType : "E"
-			typeOfExtra : extraType,
+			typeOfExtra : extraType
 		};
 		currOver.push(newBall);		
 		if(currBatting.numBalls % 6 === 0) {
