@@ -9,7 +9,7 @@ block content
 
 	div.app-window
 
-		div#step-zero(style='display:display;')
+		div#step-zero(style='display:block;')
 			div.container
 				button.next-btn.btn.btn-primary.btn-large Get Started
 
@@ -37,8 +37,7 @@ block content
 				
 				p.lead Enter Batsman
 					| <span class='batsmanNum'></span>
-				div
-					input.batsmanName(type='text', placeholder='Batsman name here...')
+				input.batsmanName(type='text', placeholder='Batsman name here...')
 				div#onStrike.btn-group(data-toggle='buttons-radio', style='margin-bottom:20px; margin-top:10px;')
 					button.btn(id='yes', type='button', value='yes') On strike
 					button.btn(id='no', type='button', value='no') Not on strike
@@ -56,9 +55,8 @@ block content
 					| ( <span class='numOvers'></span>.<span class='numBalls'></span> overs )
 
 				p.lead Add New Bowler
-				div
-					input.bowlerName(type='text', placeholder='Bowler name here...')
-				button.addBowler.btn.btn-primary(style='margin-top:5px; margin-bottom:20px; width:220px') Add Bowler
+				input.bowlerName(type='text', placeholder='Bowler name here...')
+				button.addBowler.btn.btn-primary(style='margin-top:5px; margin-bottom:20px; width:220px; display:block;') Add Bowler
 
 				p.lead Select Bowler
 				select.bowlerList(multiple='multiple', style='width:250px; height:150px; margin-bottom:25px')
