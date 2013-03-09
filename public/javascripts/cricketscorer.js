@@ -287,7 +287,7 @@ function checkIfValid(step) {
 
 	// End ball and register score
 	else if(step == 5) {
-		if($("#ballOutcome > button.active").val() === '') {
+		if($("#ballOutcome > button.active").val() === null) {
 			alert("Please select a ball outcome.");
 			return 5;
 		}
@@ -298,22 +298,35 @@ function checkIfValid(step) {
 			return 7;
 		}
 		else if(parseInt($("#ballOutcome > button.active").val()) <= 6) {
-			runs = parseInt($("#ballOutcome > button.active").val());
-			currBatting.batsmen[strikeBatsman].runs += runs;
-			currBatting.batsmen[strikeBatsman].balls += 1;
+			var runs = parseInt($("#ballOutcome > button.active").val());
+			currBatting.batsmen[currBatting.strikeBatsman].runs += runs;
+			currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
+			if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
+			if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
 			if (runs % 2 === 1)
 			{
-				temp = nonStrikeBatsman;
-				strikeBatsman = nonStrikeBatsman;
-				nonStrikeBatsman = temp;
+				var temp = currBatting.nonStrikeBatsman;
+				currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
+				currBatting.nonStrikeBatsman = temp;
 			}
-			currBowling.bowlers[bowler].runs += runs;
-			currBowling.bowlers[bowler].balls += 1;
+			currBowling.bowlers[currBowling.bowler].runs += runs;
+			currBowling.bowlers[currBowling.bowler].balls += 1;
 
 			currBatting.score += runs;
 			currBatting.numBalls += 1;
+			var newBall = {
+				runs : runs,
+				ballType : "N",
+			};
+			currOver.push(newBall);
+
 		}		
+		if(currBatting.numBalls % 6 === 0) {
+			return 3;
+		}
+		return 4;
 	}
+
 
 	// Register how wicket fell
 	else if(step == 6) {
