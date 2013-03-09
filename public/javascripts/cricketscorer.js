@@ -108,17 +108,17 @@ function launchStep(step){
 		$(".strikeBatsmanRB").html(currBatting.batsmen[currBatting.strikeBatsman].runs + " (" + currBatting.batsmen[currBatting.strikeBatsman].balls + ")");
 	    $(".nonStrikeBatsmanRB").html(currBatting.batsmen[currBatting.nonStrikeBatsman].runs + " ("  + currBatting.batsmen[currBatting.nonStrikeBatsman].balls + ")");
 		$(".bowler").html(currBowling.bowlers[currBowling.bowler].name);
-		var string = "";
+		var overRecord = "";
 		for(var i = 0; i < currOver.length; i++) 
 		{
 			if(currOver[i].ballType === "W")
-				string += "  " + "W";
+				overRecord += "  " + "W";
 			if(currOver[i].ballType === "E")
-				string += "  " + currOver[i].runs + currOver[i].typeOfExtra;
+				overRecord += "  " + currOver[i].runs + currOver[i].typeOfExtra;
 			if(currOver[i].ballType === "N")
-				string += "  " + currOver[i].runs;
+				overRecord += "  " + currOver[i].runs;
 		}
-		$(".overRecord").html(string);
+		$(".overRecord").html(overRecord);
 	}
 
 	// Register score
