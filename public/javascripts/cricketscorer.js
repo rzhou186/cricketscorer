@@ -59,27 +59,27 @@ function launchStep(step){
 	else if (step === 2) {
 
 		// Update app window contents
-		$("#step-one").remove();
+		$("#step-one").css("display", "none");
 
 		$("#step-two").css("display", "block");	
 		$(".batsmanNum").html(currBatting.batsmen.length+1);
 		$(".teamName").html(currBatting.Name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
-		$(".numOvers").html(currBatting.numBalls/6);
+		$(".numOvers").html(Math.floor(currBatting.numBalls/6));
 		$(".numBalls").html(currBatting.numBalls%6);
 		$(".batsmanName").val("");
 	}
 
 	else if (step === 3) {
 		// Update app window contents
-		$("#step-two").remove();
+		$("#step-two").css("display", "none");
 		$("#step-three").css("display", "block");	
 
 		$(".teamName").html(currBowling.Name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
-		$(".numOvers").html(currBatting.numBalls/6);
+		$(".numOvers").html(Math.floor(currBatting.numBalls/6));
 		$(".numBalls").html(currBatting.numBalls%6);
 		$(".bowlerName").val("");
 
@@ -96,12 +96,13 @@ function launchStep(step){
 
 	else if (step === 4) {
 		// Update app window contents
-		$("#step-three").remove();
+		$("#step-three").css("display", "none");
+		$("#step-five").css("display", "none");
 		$("#step-four").css("display", "block");
 		$(".teamName").html(currBowling.name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
-		$(".numOvers").html(currBatting.numBalls/6);
+		$(".numOvers").html(Math.floor(currBatting.numBalls/6));
 		$(".numBalls").html(currBatting.numBalls%6);
 		$(".strikeBatsman").html(currBatting.batsmen[currBatting.strikeBatsman].name);
 		$(".nonStrikeBatsman").html(currBatting.batsmen[currBatting.nonStrikeBatsman].name);
@@ -123,11 +124,12 @@ function launchStep(step){
 
 	// Register score
 	else if (step === 5) {
-		$("#step-four").remove();
+		$("#step-four").css("display", "none");
 		$("#step-five").css("display", "block");
+		$(".teamName").html(currBowling.name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
-		$(".numOvers").html(currBatting.numBalls/6);
+		$(".numOvers").html(Math.floor(currBatting.numBalls/6));
 		$(".numBalls").html(currBatting.numBalls%6);
 	}
 
@@ -304,14 +306,16 @@ function checkIfValid(step) {
 
 	// End ball and register score
 	else if(step == 5) {
-		if($("#ballOutcome > button.active").val() === null) {
+		var ballOutcome = $("#ballOutcome > button.active").val();
+		alert(ballOutcome);
+		if(ballOutcome === null) {
 			alert("Please select a ball outcome.");
 			return 5;
 		}
-		else if($("#ballOutcome > button.active").val() === 'wicket') {
+		else if(ballOutcome === 'wicket') {
 			return 6;		
 		}
-		else if($("#ballOutcome > button.active").val() === 'extra') {
+		else if(ballOutcome === 'extra') {
 			return 7;
 		}
 		else if(parseInt($("#ballOutcome > button.active").val()) <= 6) {
@@ -335,13 +339,14 @@ function checkIfValid(step) {
 				runs : runs,
 				ballType : "N",
 			};
-			currOver.push(newBall);
 
+			currOver.push(newBall);
+			if(currBatting.numBalls % 6 === 0) {
+				return 3;
+			}
+			return 4;
 		}		
-		if(currBatting.numBalls % 6 === 0) {
-			return 3;
-		}
-		return 4;
+
 	}
 
 
