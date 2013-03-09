@@ -98,16 +98,16 @@ function launchStep(step){
 		// Update app window contents
 		$("#step-three").remove();
 		$("#step-four").css("display", "block");
-		$(".teamName").html(currBowling.Name);
+		$(".teamName").html(currBowling.name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
 		$(".numOvers").html(currBatting.numBalls/6);
 		$(".numBalls").html(currBatting.numBalls%6);
-		$(".strikeBatsman").html(currBatting.batsmen[currBatting.strikeBatsman].Name);
-		$(".nonStrikeBatsman").html(currBatting.batsmen[currBatting.nonStrikeBatsman].Name);
+		$(".strikeBatsman").html(currBatting.batsmen[currBatting.strikeBatsman].name);
+		$(".nonStrikeBatsman").html(currBatting.batsmen[currBatting.nonStrikeBatsman].name);
 		$(".strikeBatsmanRB").html(currBatting.batsmen[currBatting.strikeBatsman].runs + " (" + currBatting.batsmen[currBatting.strikeBatsman].balls + ")");
 	    $(".nonStrikeBatsmanRB").html(currBatting.batsmen[currBatting.nonStrikeBatsman].runs + " ("  + currBatting.batsmen[currBatting.nonStrikeBatsman].balls + ")");
-		$(".bowler").html(currBowling.bowlers[currBatting.bowler].Name);
+		$(".bowler").html(currBowling.bowlers[currBowling.bowler].name);
 		var string = "";
 		for(var i = 0; i < currOver.length; i++) 
 		{
