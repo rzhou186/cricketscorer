@@ -9,9 +9,9 @@
 
 $(document).ready(function(){
 
-	for(var i = 0; i < 6; i++) {
+	/*for(var i = 0; i < 6; i++) {
 		currOver.push(-1);
-	}
+	}*/
  	$(".next-btn").click(function(){
  		// Increment currStep, then launch the next step.
  		var nextStep = checkIfValid(currStep);
@@ -105,58 +105,26 @@ function launchStep(step){
 		$(".numBalls").html(currBatting.numBalls%6);
 		$(".strikeBatsman").html(currBatting.batsmen[currBatting.strikeBatsman].Name);
 		$(".nonStrikeBatsman").html(currBatting.batsmen[currBatting.nonStrikeBatsman].Name);
-		$(".strikeBatsmanRuns").html(currBatting.batsmen[currBatting.strikeBatsman].runs);
-		$(".nonStrikeBatsmanRuns").html(currBatting.batsmen[currBatting.nonStrikeBatsman].runs);
+		$(".strikeBatsmanRB").html(currBatting.batsmen[currBatting.strikeBatsman].runs + " (" + currBatting.batsmen[currBatting.strikeBatsman].balls + ")");
+	    $(".nonStrikeBatsmanRB").html(currBatting.batsmen[currBatting.nonStrikeBatsman].runs + " ("  + currBatting.batsmen[currBatting.nonStrikeBatsman].balls + ")");
 		$(".bowler").html(currBowling.bowlers[currBatting.bowler].Name);
-		for(var i = 0; i < 6; i++) {
-			if(currOver[i] !== -1) {
-				$(".ball" + i).html(currOver[i]);
-			}
-			else {
-				$(".ball" + i).html("");
-			}
+		var string = "";
+		for(var i = 0; i < currOver.length; i++) 
+		{
+			if(currOver[i].ballType === "W")
+				string += "  " + "W";
+			if(currOver[i].ballType === "E")
+				string += "  " + currOver[i].runs + currOver[i].typeOfExtra;
+			if(currOver[i].ballType === "N")
+				string += "  " + currOver[i].runs;
 		}
-		if(currOver[0] !== -1) {
-			$(".ball1").html(currOver[0]);
-		}
-		else {
-			$(".ball1").html("");
-		}
-		if(currOver[1] !== -1) {
-			$(".ball2").html(currOver[1]);
-		}
-		else {
-			$(".ball2").html("");
-		}
-		if(currOver[2] !== -1) {
-			$(".ball3").html(currOver[2]);
-		}
-		else {
-			$(".ball3").html("");
-		}
-		if(currOver[3] !== -1) {
-			$(".ball4").html(currOver[3]);
-		}
-		else {
-			$(".ball4").html("");
-		}
-		if(currOver[4] !== -1) {
-			$(".ball5").html(currOver[4]);
-		}
-		else {
-			$(".ball5").html("");
-		}
-		if(currOver[5] !== -1) {
-			$(".ball6").html(currOver[5]);
-		}
-		else {
-			$(".ball6").html("");
-		}
+		$(".overRecord").html(string);
 	}
 
 	// Register score
 	else if (step === 5) {
-
+		$("#step-four").remove();
+		$("#step-five").css("display", "block");
 	}
 
 	// Wicket Fall
@@ -345,7 +313,6 @@ function checkIfValid(step) {
 			currBatting.score += runs;
 			currBatting.numBalls += 1;
 		}		
-
 	}
 
 	// Register how wicket fell
