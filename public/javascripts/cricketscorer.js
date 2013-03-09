@@ -51,11 +51,11 @@ function launchStep(step){
 		// Update app window contents
 		$("#step-one").remove();
 		$("#step-two").css("display", "block");	
-		$(".teamName").val(currBatting.Name);
-		$(".teamScore").val(currBatting.score);
-		$(".teamWickets").val(currBatting.wickets);
-		$(".numOvers").val(currBatting.numBalls/6);
-		$(".numBalls").val(currBatting.numBalls%6);
+		$(".teamName").html(currBatting.Name);
+		$(".teamScore").html(currBatting.score);
+		$(".teamWickets").html(currBatting.wickets);
+		$(".numOvers").html(currBatting.numBalls/6);
+		$(".numBalls").html(currBatting.numBalls%6);
 
 	}
 
