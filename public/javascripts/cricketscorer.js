@@ -89,16 +89,18 @@ function checkIfValid(step) {
 		}
 	}
 	else if(step === 2) {
+		// this is step 2
 		$(".teamName").val(currBatting.Name);
 		$(".teamScore").val(currBatting.score);
 		$(".teamWickets").val(currBatting.wickets);
 
+		// Create a new batsman
 		var batsman = {
 			name:$(".batsmanName").val(),
-			runs:0,
+			runs:"0",
 			out:"not out",
-			fours:0,
-			sixes:0
+			fours:"0",
+			sixes:"0"
 		};
 		currBatting.batsmen.push(batsman);
 	}
