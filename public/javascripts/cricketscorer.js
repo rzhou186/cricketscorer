@@ -108,17 +108,17 @@ function launchStep(step){
 		$(".strikeBatsmanRB").html(currBatting.batsmen[currBatting.strikeBatsman].runs + " (" + currBatting.batsmen[currBatting.strikeBatsman].balls + ")");
 	    $(".nonStrikeBatsmanRB").html(currBatting.batsmen[currBatting.nonStrikeBatsman].runs + " ("  + currBatting.batsmen[currBatting.nonStrikeBatsman].balls + ")");
 		$(".bowler").html(currBowling.bowlers[currBowling.bowler].name);
-		var string = "";
+		var overRecord = "&nbsp;";
 		for(var i = 0; i < currOver.length; i++) 
 		{
 			if(currOver[i].ballType === "W")
-				string += "  " + "W";
+				overRecord += "  " + "W";
 			if(currOver[i].ballType === "E")
-				string += "  " + currOver[i].runs + currOver[i].typeOfExtra;
+				overRecord += "  " + currOver[i].runs + currOver[i].typeOfExtra;
 			if(currOver[i].ballType === "N")
-				string += "  " + currOver[i].runs;
+				overRecord += "  " + currOver[i].runs;
 		}
-		$(".overRecord").html(string);
+		$(".overRecord").html(overRecord);
 	}
 
 	// Register score
@@ -129,6 +129,8 @@ function launchStep(step){
 
 	// Wicket Fall
 	else if (step === 6) {
+		$("#step-five").remove();
+		$("#step-six").css("display", "block");
 
     	$('.batsmenList').empty(); 
 		
@@ -143,6 +145,12 @@ function launchStep(step){
         	value: currBatting.nonStrikeBatsman,
         	text : batsman.name 
     	}));
+	}
+
+	// Register extras
+	else if (step === 7) {
+		$("#step-five").remove();
+		$("#step-seven").css("display", "block");
 	}
 }
 
@@ -336,6 +344,48 @@ function checkIfValid(step) {
 	// Register extra run
 	else if(step == 7) {
 		
+		if($("#extraType > button.active").val() === null) {
+			alert("Please select an extra type.");
+			return 7;
+		}
+
+		if($("#numRuns > button.active").val() === null) {
+			alert("Please select additional runs scored on the extra.");
+			return 7;
+		}
+
+		var extraType = $("#extraType > button.active").val();
+		var runs = parseInt($("#numRuns > button.active").val());
+		var extraRun = 1;
+		if (extraType === "Byes") {
+			extraRun = 0;
+			currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
+			currBowling.bowlers[currBowling.bowler].balls += 1;
+			currBatting.numBalls += 1;
+		}
+
+		currBatting.batsmen[currBatting.strikeBatsman].runs += (runs + extraRun);
+		if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
+		if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
+		if (runs % 2 === 1)
+		{
+			var temp = currBatting.nonStrikeBatsman;
+			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
+			currBatting.nonStrikeBatsman = temp;
+		}
+		currBowling.bowlers[currBowling.bowler].runs += (runs + extraRun);
+
+		currBatting.score += (runs + extraRun);
+		var newBall = {
+			runs : runs,
+			ballType : extraType,
+		};
+		currOver.push(newBall);		
+		if(currBatting.numBalls % 6 === 0) {
+			return 3;
+		}
+
+		return 4;
 	}
 
 	return 1;
