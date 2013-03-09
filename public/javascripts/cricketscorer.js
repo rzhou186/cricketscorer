@@ -69,7 +69,7 @@ function checkIfValid(step) {
 	{
 		teamOne.Name = $("#team1-name").val();
 		teamTwo.Name = $("#team2-name").val();
-		if($("#team1-radio").attr("checked") != "undefined") {
+		if($("#batting-team > button.active").val() === '1') {
 		currBatting = teamOne;
 		}
 		else {
