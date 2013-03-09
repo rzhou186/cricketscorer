@@ -60,8 +60,11 @@ function launchStep(step){
 
 		// Update app window contents
 		$("#step-one").css("display", "none");
-
-		$("#step-two").css("display", "block");	
+		$("#step-three").css("display", "none");
+		$("#step-four").css("display", "none");
+		$("#step-five").css("display", "none");
+		$("#step-six").css("display", "none");
+		$("#step-two").css("display", "block");
 		$(".batsmanNum").html(currBatting.batsmen.length+1);
 		$(".teamName").html(currBatting.Name);
 		$(".teamScore").html(currBatting.score);
@@ -73,9 +76,12 @@ function launchStep(step){
 
 	else if (step === 3) {
 		// Update app window contents
+		$("#step-one").css("display", "none");
 		$("#step-two").css("display", "none");
+		$("#step-four").css("display", "none");
+		$("#step-five").css("display", "none");
+		$("#step-six").css("display", "none");
 		$("#step-three").css("display", "block");	
-
 		$(".teamName").html(currBowling.Name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
@@ -96,8 +102,11 @@ function launchStep(step){
 
 	else if (step === 4) {
 		// Update app window contents
+		$("#step-one").css("display", "none");
+		$("#step-two").css("display", "none");
 		$("#step-three").css("display", "none");
 		$("#step-five").css("display", "none");
+		$("#step-six").css("display", "none");
 		$("#step-four").css("display", "block");
 		$(".teamName").html(currBowling.name);
 		$(".teamScore").html(currBatting.score);
@@ -124,7 +133,11 @@ function launchStep(step){
 
 	// Register score
 	else if (step === 5) {
+		$("#step-one").css("display", "none");
+		$("#step-two").css("display", "none");
+		$("#step-three").css("display", "none");
 		$("#step-four").css("display", "none");
+		$("#step-six").css("display", "none");
 		$("#step-five").css("display", "block");
 		$(".teamName").html(currBowling.name);
 		$(".teamScore").html(currBatting.score);
@@ -135,11 +148,12 @@ function launchStep(step){
 
 	// Wicket Fall
 	else if (step === 6) {
-		$("#step-five").remove();
+		$("#step-one").css("display", "none");
+		$("#step-two").css("display", "none");
+		$("#step-three").css("display", "none");
+		$("#step-four").css("display", "none");
+		$("#step-five").css("display", "none");
 		$("#step-six").css("display", "block");
-
-		$("step-five").remove();
-		$("step-six").css("display", "block");
 		$('#batsmanOne').html(currBatting.batsmen[currBatting.strikeBatsman].name);
 		$('#batsmanTwo').html(currBatting.batsmen[currBatting.nonStrikeBatsman].name);
 
@@ -358,10 +372,12 @@ function checkIfValid(step) {
 		}
 		if($("#outMethod > button.active").val() === null) {
 			alert("Please select the way the wicket was taken!");
+			return 6;
 		}
 		var batsmanOut = $("#batsmanSelect > button.active").val();
 		var outMethod = $("#outMethod > button.active").val();
-		if(batsmanOut === currBatting.batsmen[currBatting.strikeBatsman].name) {
+		currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
+		if(batsmanOut === "1") {
 			currBatting.batsmen[currBatting.strikeBatsman].out = outMethod;
 			currBatting.strikeBatsman = -1;
 		}
@@ -370,7 +386,6 @@ function checkIfValid(step) {
 			currBatting.nonStrikeBatsman = -1;
 		}
 		currBatting.wickets+=1;
-		currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
 		currBowling.bowlers[currBowling.bowler].balls += 1;
 		currBatting.numBalls += 1;
 		return 2;
