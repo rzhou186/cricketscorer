@@ -93,6 +93,8 @@ function checkIfValid(step) {
 		$(".teamName").val(currBatting.Name);
 		$(".teamScore").val(currBatting.score);
 		$(".teamWickets").val(currBatting.wickets);
+		$(".numOvers").val(currBatting.numBalls/6);
+		$(".numBalls").val(currBatting.numBalls%6);
 
 		// Create a new batsman
 		var batsman = {
