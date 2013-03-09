@@ -36,6 +36,16 @@ $(document).ready(function(){
 
 });
 
+function hideAll {
+	$("#step-one").css("display", "none");
+	$("#step-two").css("display", "none");
+	$("#step-three").css("display", "none");
+	$("#step-four").css("display", "none");
+	$("#step-five").css("display", "none");
+	$("#step-six").css("display", "none");
+	$("#step-seven").css("display", "none");
+}
+
 /*
  * Function: launchStep
  * ----------------------------------------
@@ -51,7 +61,7 @@ function launchStep(step){
  		$(".subhead-window").remove();
 
  		// Update app window contents
-		$("#step-zero").remove();
+		hideAll();
 		$("#step-one").css("display", "block");
 
 	}
@@ -59,8 +69,7 @@ function launchStep(step){
 	else if (step === 2) {
 
 		// Update app window contents
-		$("#step-one").css("display", "none");
-
+		hideAll();
 		$("#step-two").css("display", "block");	
 		$(".batsmanNum").html(currBatting.batsmen.length+1);
 		$(".teamName").html(currBatting.Name);
@@ -73,7 +82,7 @@ function launchStep(step){
 
 	else if (step === 3) {
 		// Update app window contents
-		$("#step-two").css("display", "none");
+		hideAll();
 		$("#step-three").css("display", "block");	
 
 		$(".teamName").html(currBowling.Name);
@@ -96,8 +105,7 @@ function launchStep(step){
 
 	else if (step === 4) {
 		// Update app window contents
-		$("#step-three").css("display", "none");
-		$("#step-five").css("display", "none");
+		hideAll();
 		$("#step-four").css("display", "block");
 		$(".teamName").html(currBowling.name);
 		$(".teamScore").html(currBatting.score);
@@ -124,7 +132,7 @@ function launchStep(step){
 
 	// Register score
 	else if (step === 5) {
-		$("#step-four").css("display", "none");
+		hideAll();
 		$("#step-five").css("display", "block");
 		$(".teamName").html(currBowling.name);
 		$(".teamScore").html(currBatting.score);
@@ -135,7 +143,7 @@ function launchStep(step){
 
 	// Wicket Fall
 	else if (step === 6) {
-		$("#step-five").css("display", "none");
+		hideAll();
 		$("#step-six").css("display", "block");
 
 		$('#batsmanOne').html(currBatting.batsmen[currBatting.strikeBatsman].name);
@@ -158,7 +166,7 @@ function launchStep(step){
 
 	// Register extras
 	else if (step === 7) {
-		$("#step-five").css("display", "none");
+		hideAll();
 		$("#step-seven").css("display", "block");
 	}
 }
