@@ -59,7 +59,6 @@ function launchStep(step){
 		$(".numOvers").html(currBatting.numBalls/6);
 		$(".numBalls").html(currBatting.numBalls%6);
 		$(".batsmanName").val("");
-		$("#onStrike > button.active").val('yes');
 	}
 
 	else if (step === 3) {
@@ -116,6 +115,11 @@ function checkIfValid(step) {
 
 		if($("#onStrike > button.active").val() === 'yes') {
 			currBatting.strikeBatsman = currBatting.batsmen.length;
+			if (currBatting.batsmen.length > 0 && currBatting.nonStrikeBatsman < 0)
+			{
+				alert("At least one batsman must be on non-strike.");
+				return 2;
+			}			
 		}
 		else if($("#onStrike > button.active").val() === 'no') {
 			if (currBatting.batsmen.length > 0 && currBatting.strikeBatsman < 0)
