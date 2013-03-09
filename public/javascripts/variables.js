@@ -25,6 +25,7 @@ teamOne.numBalls = 0;
 teamOne.strikeBatsman = -1;
 teamOne.nonStrikeBatsman = -1;
 teamOne.bowler = -1;
+teamOne.extras = 0;
 
 // Team Two
 
@@ -38,3 +39,4 @@ teamTwo.numBalls = 0;
 teamTwo.strikeBatsman = -1;
 teamTwo.nonStrikeBatsman = -1;
 teamTwo.bowler = -1;
+teamTwo.extras = 0;

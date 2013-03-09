@@ -32,9 +32,25 @@ $(document).ready(function(){
  	// End Innings
  	$(".endInnings").click(function(){
 
+ 		var temp = currBatting;
+ 		currBatting = currBowling;
+ 		currBowling = temp;
+ 		currStep = 2;
+ 		launchStep(currStep);
  	});
 
 });
+
+function hideAll() {
+	$("#step-zero").css("display", "none");
+	$("#step-one").css("display", "none");
+	$("#step-two").css("display", "none");
+	$("#step-three").css("display", "none");
+	$("#step-four").css("display", "none");
+	$("#step-five").css("display", "none");
+	$("#step-six").css("display", "none");
+	$("#step-seven").css("display", "none");
+}
 
 /*
  * Function: launchStep
@@ -51,7 +67,7 @@ function launchStep(step){
  		$(".subhead-window").remove();
 
  		// Update app window contents
-		$("#step-zero").remove();
+		hideAll();
 		$("#step-one").css("display", "block");
 
 	}
@@ -59,27 +75,26 @@ function launchStep(step){
 	else if (step === 2) {
 
 		// Update app window contents
-		$("#step-one").remove();
-
+		hideAll();
 		$("#step-two").css("display", "block");	
 		$(".batsmanNum").html(currBatting.batsmen.length+1);
 		$(".teamName").html(currBatting.Name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
-		$(".numOvers").html(currBatting.numBalls/6);
+		$(".numOvers").html(Math.floor(currBatting.numBalls/6));
 		$(".numBalls").html(currBatting.numBalls%6);
 		$(".batsmanName").val("");
 	}
 
 	else if (step === 3) {
 		// Update app window contents
-		$("#step-two").remove();
+		hideAll();
 		$("#step-three").css("display", "block");	
-
-		$(".teamName").html(currBowling.Name);
+		$(".teamName").html(currBatting.Name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
-		$(".numOvers").html(currBatting.numBalls/6);
+		$(".bowlingName").html(currBowling.Name);
+		$(".numOvers").html(Math.floor(currBatting.numBalls/6));
 		$(".numBalls").html(currBatting.numBalls%6);
 		$(".bowlerName").val("");
 
@@ -96,12 +111,12 @@ function launchStep(step){
 
 	else if (step === 4) {
 		// Update app window contents
-		$("#step-three").remove();
+		hideAll();
 		$("#step-four").css("display", "block");
-		$(".teamName").html(currBowling.name);
+		$(".teamName").html(currBatting.name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
-		$(".numOvers").html(currBatting.numBalls/6);
+		$(".numOvers").html(Math.floor(currBatting.numBalls/6));
 		$(".numBalls").html(currBatting.numBalls%6);
 		$(".strikeBatsman").html(currBatting.batsmen[currBatting.strikeBatsman].name);
 		$(".nonStrikeBatsman").html(currBatting.batsmen[currBatting.nonStrikeBatsman].name);
@@ -123,22 +138,19 @@ function launchStep(step){
 
 	// Register score
 	else if (step === 5) {
-		$("#step-four").remove();
+		hideAll();
 		$("#step-five").css("display", "block");
-		$(".teamName").html(currBowling.name);
+		$(".teamName").html(currBatting.name);
 		$(".teamScore").html(currBatting.score);
 		$(".teamWickets").html(currBatting.wickets);
-		$(".numOvers").html(currBatting.numBalls/6);
-		$(".numBalls").html(currBatting.numBalls%6);		
+		$(".numOvers").html(Math.floor(currBatting.numBalls/6));
+		$(".numBalls").html(currBatting.numBalls%6);
 	}
 
 	// Wicket Fall
 	else if (step === 6) {
-		$("#step-five").remove();
+		hideAll();
 		$("#step-six").css("display", "block");
-
-		$("step-five").remove();
-		$("step-six").css("display", "block");
 		$('#batsmanOne').html(currBatting.batsmen[currBatting.strikeBatsman].name);
 		$('#batsmanTwo').html(currBatting.batsmen[currBatting.nonStrikeBatsman].name);
 
@@ -159,7 +171,7 @@ function launchStep(step){
 
 	// Register extras
 	else if (step === 7) {
-		$("#step-five").remove();
+		hideAll();
 		$("#step-seven").css("display", "block");
 	}
 }
@@ -193,7 +205,7 @@ function checkIfValid(step) {
 			return 1;
 		}
 		else if($('#battingTeam > button.active').val() !== '1' && $('#battingTeam > button.active').val() !== '2') {
-			alert ("Select at least one of the radio buttons");
+			alert ("Select the team that will bat first.");
 			return 1;
 		}
 
@@ -210,18 +222,16 @@ function checkIfValid(step) {
 		}
 
 		if($("#onStrike > button.active").val() === 'yes') {
-			currBatting.strikeBatsman = currBatting.batsmen.length;
-			if (currBatting.batsmen.length > 0 && currBatting.nonStrikeBatsman < 0)
+			if(currBatting.strikeBatsman >= 0)
 			{
-				alert("At least one batsman must be on non-strike.");
-				return 2;
-			}			
+				currBatting.nonStrikeBatsman = currBatting.strikeBatsman;
+			}
+			currBatting.strikeBatsman = currBatting.batsmen.length;			
 		}
 		else if($("#onStrike > button.active").val() === 'no') {
-			if (currBatting.batsmen.length > 0 && currBatting.strikeBatsman < 0)
+			if(currBatting.nonStrikeBatsman >= 0)
 			{
-				alert("At least one batsman must be on strike.");
-				return 2;
+				currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 			}
 			currBatting.nonStrikeBatsman = currBatting.batsmen.length;
 		}
@@ -294,7 +304,7 @@ function checkIfValid(step) {
 				break;		
 			}
 		}
-
+		currOver = [];
 		return 4;
 	}
 
@@ -305,17 +315,18 @@ function checkIfValid(step) {
 
 	// End ball and register score
 	else if(step == 5) {
-		if($("#ballOutcome > button.active").val() === null) {
+		var ballOutcome = $("#ballOutcome > button.active").val();
+		if(ballOutcome === null) {
 			alert("Please select a ball outcome.");
 			return 5;
 		}
-		else if($("#ballOutcome > button.active").val() === 'wicket') {
+		else if(ballOutcome === 'wicket') {
 			return 6;		
 		}
-		else if($("#ballOutcome > button.active").val() === 'extra') {
+		else if(ballOutcome === 'extra') {
 			return 7;
 		}
-		else if(parseInt($("#ballOutcome > button.active").val()) <= 6) {
+		else if(parseInt(ballOutcome) <= 6) {
 			var runs = parseInt($("#ballOutcome > button.active").val());
 			currBatting.batsmen[currBatting.strikeBatsman].runs += runs;
 			currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
@@ -323,7 +334,7 @@ function checkIfValid(step) {
 			if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
 			if (runs % 2 === 1)
 			{
-				var temp = currBatting.nonStrikeBatsman;
+				var temp = currBatting.strikeBatsman;
 				currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 				currBatting.nonStrikeBatsman = temp;
 			}
@@ -336,34 +347,48 @@ function checkIfValid(step) {
 				runs : runs,
 				ballType : "N",
 			};
-			currOver.push(newBall);
 
+			currOver.push(newBall);
+			if(currBatting.numBalls % 6 === 0) {
+				var temp = currBatting.strikeBatsman;
+				currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
+				currBatting.nonStrikeBatsman = temp;				
+				return 3;
+			}
+			return 4;
 		}		
-		if(currBatting.numBalls % 6 === 0) {
-			return 3;
-		}
-		return 4;
+
 	}
 
 
 	// Register how wicket fell
 	else if(step == 6) {
-		if($("#batsmanSelect > button.active").val() === null) {
+		if($("#batsmanSelect > button.active").val() === undefined) {
 			alert("Please select a batsman!");
 			return 6;
 		}
-		if($("#outMethod > button.active").val() === null) {
+		if($("#outMethod > button.active").val() === undefined) {
 			alert("Please select the way the wicket was taken!");
+			return 6;
 		}
 		var batsmanOut = $("#batsmanSelect > button.active").val();
 		var outMethod = $("#outMethod > button.active").val();
-		if(batsmanOut === currBatting.batsmen[currBatting.strikeBatsman].name) {
+		currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
+		if(batsmanOut === "1") {
 			currBatting.batsmen[currBatting.strikeBatsman].out = outMethod;
+			currBatting.strikeBatsman = -1;
 		}
 		else {
 			currBatting.batsmen[currBatting.nonStrikeBatsman].out = outMethod;
+			currBatting.nonStrikeBatsman = -1;
 		}
-		currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
+			var newBall = {
+				runs : 0,
+				ballType : "W",
+			};
+
+		currOver.push(newBall);
+		currBatting.wickets+=1;
 		currBowling.bowlers[currBowling.bowler].balls += 1;
 		currBatting.numBalls += 1;
 		return 2;
@@ -371,33 +396,44 @@ function checkIfValid(step) {
 
 	// Register extra run
 	else if(step == 7) {
-		
-		if($("#extraType > button.active").val() === null) {
+		if($("#extraType > button.active").val() === undefined) {
 			alert("Please select an extra type.");
 			return 7;
 		}
 
-		if($("#numRuns > button.active").val() === null) {
+		if($("#numRuns > button.active").val() === undefined) {
 			alert("Please select additional runs scored on the extra.");
 			return 7;
 		}
 
 		var extraType = $("#extraType > button.active").val();
 		var runs = parseInt($("#numRuns > button.active").val());
+		
 		var extraRun = 1;
-		if (extraType === "Byes") {
+
+		// Count the ball if its byes and dont give extra run
+		if (extraType === "B") {
 			extraRun = 0;
 			currBatting.batsmen[currBatting.strikeBatsman].balls += 1;
 			currBowling.bowlers[currBowling.bowler].balls += 1;
 			currBatting.numBalls += 1;
+			currBatting.extras += runs;
+		}
+		// Batsman score runs only if its no ball
+		else if (extraType === "NB") {
+			currBatting.batsmen[currBatting.strikeBatsman].runs += runs;
+			if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
+			if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
+			currBatting.extras += (runs + 1);			
+		}
+		// Only team gets runs for wides
+		else if (extraType === "W") {
+			currBatting.extras += (runs + 1);			
 		}
 
-		currBatting.batsmen[currBatting.strikeBatsman].runs += (runs + extraRun);
-		if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
-		if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
 		if (runs % 2 === 1)
 		{
-			var temp = currBatting.nonStrikeBatsman;
+			var temp = currBatting.strikeBatsman;
 			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 			currBatting.nonStrikeBatsman = temp;
 		}
@@ -406,10 +442,14 @@ function checkIfValid(step) {
 		currBatting.score += (runs + extraRun);
 		var newBall = {
 			runs : runs,
-			ballType : extraType,
+			ballType : "E",
+			typeOfExtra : extraType
 		};
 		currOver.push(newBall);		
-		if(currBatting.numBalls % 6 === 0) {
+		if(currBatting.numBalls % 6 === 0 && currBatting.numBalls > 0) {
+			var temp = currBatting.strikeBatsman;
+			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
+			currBatting.nonStrikeBatsman = temp;		
 			return 3;
 		}
 
