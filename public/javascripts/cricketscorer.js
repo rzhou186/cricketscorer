@@ -20,7 +20,7 @@ $(document).ready(function(){
  	});
 
  	// End Innings
- 	$(".end-innings-btn").click(function(){
+ 	$(".endInnings").click(function(){
 
  	});
 
@@ -109,7 +109,7 @@ function checkIfValid(step) {
 			return 0;
 		}
 
-		if($("#on-strike > button.active").val() === 'yes') {
+		if($("#onStrike > button.active").val() === 'yes') {
 			currBatting.strikeBatsman = currBatting.batsmen.length();
 		}
 
@@ -124,12 +124,12 @@ function checkIfValid(step) {
 		currBatting.batsmen.push(batsman);
 	}
 	
-	// Display score while ball is being played
+	// End ball and register score	
 	else if(step === 3) {
 
 	}
 	
-	// End ball and register score
+	// Display score while ball is being played	
 	else if(step === 4) {
 
 	}
