@@ -108,7 +108,7 @@ function launchStep(step){
 		$(".strikeBatsmanRB").html(currBatting.batsmen[currBatting.strikeBatsman].runs + " (" + currBatting.batsmen[currBatting.strikeBatsman].balls + ")");
 	    $(".nonStrikeBatsmanRB").html(currBatting.batsmen[currBatting.nonStrikeBatsman].runs + " ("  + currBatting.batsmen[currBatting.nonStrikeBatsman].balls + ")");
 		$(".bowler").html(currBowling.bowlers[currBowling.bowler].name);
-		var overRecord = "";
+		var overRecord = "&nbsp;";
 		for(var i = 0; i < currOver.length; i++) 
 		{
 			if(currOver[i].ballType === "W")
