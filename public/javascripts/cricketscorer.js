@@ -19,6 +19,11 @@ $(document).ready(function(){
  		}
  	});
 
+ 	// End Innings
+ 	$(".end-innings-btn").click(function(){
+
+ 	});
+
 });
 
 /*
@@ -70,6 +75,7 @@ function launchStep(step){
  * 
  */
 function checkIfValid(step) {
+	// Add teams
 	if(step === 1)
 	{
 		teamOne.Name = $("#team1-name").val();
@@ -93,6 +99,7 @@ function checkIfValid(step) {
 			return 0;
 		}
 	}
+	// Add batsman
 	else if(step === 2) {
 
 		var batsmanName = $(".batsmanName").val();
@@ -101,6 +108,11 @@ function checkIfValid(step) {
 			alert("Please enter batsman name");
 			return 0;
 		}
+
+		if($("#on-strike > button.active").val() === 'yes') {
+			currBatting.strikeBatsman = currBatting.batsmen.length();
+		}
+
 		// Create a new batsman
 		var batsman = {
 			name:batsmanName,
@@ -112,6 +124,36 @@ function checkIfValid(step) {
 		currBatting.batsmen.push(batsman);
 	}
 	
+	// Display score while ball is being played
+	else if(step === 3) {
+
+	}
+	
+	// End ball and register score
+	else if(step === 4) {
+
+	}
+	
+	// Add or select bowler at the end of over
+	else if(step === 5) {
+
+	}
+
+	// Register how wicket fell
+	else if(step == 6) {
+
+	}
+
+	// Register the type of extra run scored
+	else if(step == 7) {
+
+	}
+
+	// End Innings
+	else if(step == 8) {
+		
+	}
+
 	// All checks successful
 	return 1;
 }
