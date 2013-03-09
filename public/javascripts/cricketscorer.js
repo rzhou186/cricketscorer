@@ -293,7 +293,7 @@ function checkIfValid(step) {
 				break;		
 			}
 		}
-
+		currOver = [];
 		return 4;
 	}
 
@@ -415,6 +415,9 @@ function checkIfValid(step) {
 		};
 		currOver.push(newBall);		
 		if(currBatting.numBalls % 6 === 0) {
+			var temp = currBatting.nonStrikeBatsman;
+			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
+			currBatting.nonStrikeBatsman = temp;		
 			return 3;
 		}
 
