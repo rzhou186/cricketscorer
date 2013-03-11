@@ -281,6 +281,7 @@ function checkIfValid(step) {
 			runs: 0,
 			overs: 0,
 			wickets: 0,
+			maidens: 0
 		};
 		currBowling.bowlers.push(bowler);
 		return 3;
