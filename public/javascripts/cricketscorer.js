@@ -281,7 +281,8 @@ function checkIfValid(step) {
 			runs: 0,
 			overs: 0,
 			wickets: 0,
-			maidens: 0
+			maidens: 0,
+			runsBeforeOver: 0
 		};
 		currBowling.bowlers.push(bowler);
 		return 3;
@@ -304,6 +305,7 @@ function checkIfValid(step) {
 				currBowling.bowler = i;	
 				break;		
 			}
+			bowler.runsBeforeOver = runs;
 		}
 		currOver = [];
 		return 4;
@@ -353,7 +355,13 @@ function checkIfValid(step) {
 			if(currBatting.numBalls % 6 === 0) {
 				var temp = currBatting.strikeBatsman;
 				currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
-				currBatting.nonStrikeBatsman = temp;				
+				currBatting.nonStrikeBatsman = temp;
+
+				if (bowler.runsBeforeOver === bowler.runs)
+				{
+					bowler.maidens += 1;
+				}
+
 				return 3;
 			}
 			return 4;
@@ -450,7 +458,13 @@ function checkIfValid(step) {
 		if(currBatting.numBalls % 6 === 0 && currBatting.numBalls > 0) {
 			var temp = currBatting.strikeBatsman;
 			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
-			currBatting.nonStrikeBatsman = temp;		
+			currBatting.nonStrikeBatsman = temp;
+
+			if (bowler.runsBeforeOver === bowler.runs)
+			{
+				bowler.maidens += 1;
+			}
+
 			return 3;
 		}
 
