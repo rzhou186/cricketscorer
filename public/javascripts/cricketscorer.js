@@ -435,11 +435,13 @@ function checkIfValid(step) {
 			currBatting.batsmen[currBatting.strikeBatsman].runs += runs;
 			if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
 			if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
-			currBatting.extras += (runs + 1);			
+			currBatting.extras += (runs + 1);
+			currBowling.bowler.noballs += 1;			
 		}
 		// Only team gets runs for wides
 		else if (extraType === "W") {
-			currBatting.extras += (runs + 1);			
+			currBatting.extras += (runs + 1);
+			currBowling.bowler.wides += 1;			
 		}
 
 		if (runs % 2 === 1)
