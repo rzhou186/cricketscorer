@@ -36,6 +36,7 @@ $(document).ready(function(){
  		currBatting = currBowling;
  		currBowling = temp;
  		currStep = 2;
+ 		currInnings += 1;
  		launchStep(currStep);
  	});
 
