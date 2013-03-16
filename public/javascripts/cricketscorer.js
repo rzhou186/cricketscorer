@@ -402,6 +402,7 @@ function checkIfValid(step) {
 		currOver.push(newBall);
 		currBatting.wickets+=1;
 		currBowling.bowlers[currBowling.bowler].balls += 1;
+		currBowling.bowlers[currBowling.bowlers].wickets += 1;
 		currBatting.numBalls += 1;
 		return 2;
 	}
