@@ -36,6 +36,7 @@ $(document).ready(function(){
  		currBatting = currBowling;
  		currBowling = temp;
  		currStep = 2;
+ 		currInnings += 1;
  		launchStep(currStep);
  	});
 
@@ -281,6 +282,10 @@ function checkIfValid(step) {
 			runs: 0,
 			overs: 0,
 			wickets: 0,
+			maidens: 0,
+			runsBeforeOver: 0,
+			noballs: 0,
+			wides: 0
 		};
 		currBowling.bowlers.push(bowler);
 		return 3;
@@ -303,6 +308,7 @@ function checkIfValid(step) {
 				currBowling.bowler = i;	
 				break;		
 			}
+			bowler.runsBeforeOver = runs;
 		}
 		currOver = [];
 		return 4;
@@ -352,7 +358,13 @@ function checkIfValid(step) {
 			if(currBatting.numBalls % 6 === 0) {
 				var temp = currBatting.strikeBatsman;
 				currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
-				currBatting.nonStrikeBatsman = temp;				
+				currBatting.nonStrikeBatsman = temp;
+
+				if (bowler.runsBeforeOver === bowler.runs)
+				{
+					bowler.maidens += 1;
+				}
+
 				return 3;
 			}
 			return 4;
@@ -390,6 +402,7 @@ function checkIfValid(step) {
 		currOver.push(newBall);
 		currBatting.wickets+=1;
 		currBowling.bowlers[currBowling.bowler].balls += 1;
+		currBowling.bowlers[currBowling.bowlers].wickets += 1;
 		currBatting.numBalls += 1;
 		return 2;
 	}
@@ -424,11 +437,13 @@ function checkIfValid(step) {
 			currBatting.batsmen[currBatting.strikeBatsman].runs += runs;
 			if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
 			if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
-			currBatting.extras += (runs + 1);			
+			currBatting.extras += (runs + 1);
+			currBowling.bowler.noballs += 1;			
 		}
 		// Only team gets runs for wides
 		else if (extraType === "W") {
-			currBatting.extras += (runs + 1);			
+			currBatting.extras += (runs + 1);
+			currBowling.bowler.wides += 1;			
 		}
 
 		if (runs % 2 === 1)
@@ -449,7 +464,13 @@ function checkIfValid(step) {
 		if(currBatting.numBalls % 6 === 0 && currBatting.numBalls > 0) {
 			var temp = currBatting.strikeBatsman;
 			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
-			currBatting.nonStrikeBatsman = temp;		
+			currBatting.nonStrikeBatsman = temp;
+
+			if (currBowling.bowler.runsBeforeOver === currBowling.bowler.runs)
+			{
+				currBowling.bowler.maidens += 1;
+			}
+
 			return 3;
 		}
 

@@ -7,6 +7,8 @@
 
 var currStep = 0;
 
+var currInnings = 1;
+
 var currBatting;
 var currBowling;
 
