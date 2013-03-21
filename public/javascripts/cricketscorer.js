@@ -32,16 +32,16 @@ $(document).ready(function(){
  	// End Innings
  	$(".endInnings").click(function(){
 
+ 		if(currInnings == 3) {
+  			currStep = 8;
+ 			launchStep(currStep);
+ 		}
+ 		else {
  		var temp = currBatting;
  		currBatting = currBowling;
  		currBowling = temp;
  		currStep = 2;
  		currInnings += 1;
- 		if(currInnings === 2) {
- 			currStep = 8;
- 			launchStep(currStep);
- 		}
- 		else {
  		launchStep(currStep);
  		}
  	});
@@ -60,6 +60,53 @@ function hideAll() {
 	$("#step-eight").css("display", "none");
 }
 
+function getTableCode (curr) {
+  var tableCode = "<table cellpadding = \"10\">";
+        tableCode += "<tr>";
+        tableCode += "<th> Name </th>";
+        tableCode += "<th> Out </th>"
+        tableCode += "<th> R </th>";
+        tableCode += "<th> B </th>";
+        tableCode += "<th> F </th>";
+        tableCode += "<th> S </th>";
+        tableCode += "</tr>";
+     for(var i = 0; i < curr.batsmen.length; i++) {
+     	tableCode += "<tr >";
+     	tableCode += "<td>" + curr.batsmen[i].name + "</td>";
+     	tableCode += "<td>" + curr.batsmen[i].out + "</td>";
+        tableCode += "<td>" + curr.batsmen[i].runs + "</td>";
+        tableCode += "<td>" + curr.batsmen[i].balls + "</td>";
+        tableCode += "<td>" + curr.batsmen[i].fours + "</td>";
+        tableCode += "<td>" + curr.batsmen[i].sixes + "</td>";
+        tableCode += "</tr>";
+     }
+     tableCode += "</table>";
+     tableCode += "Extras : " + curr.extras + "<br/>";
+     tableCode += "Final score : " + curr.score + "/" + curr.wickets + " (" + Math.floor(curr.numBalls/6) +"." + curr.numBalls%6 + " overs)" + "<br/>";
+return tableCode;
+}
+
+function getTableBowl(curr) {
+	var tableCode = "<table cellpadding = \"10\">";
+	tableCode += "<tr>";
+	tableCode += "<th>Name </th>";
+    tableCode += "<th> Overs </th>"
+    tableCode += "<th> M </th>";
+    tableCode += "<th> R </th>";
+    tableCode += "<th> W </th>";
+    tableCode += "</tr>";
+    for (var i = 0; i < curr.bowlers.length; i++) {
+    	tableCode += "<tr>";
+    	tableCode += "<td>" + curr.bowlers[i].name + "</td>";
+    	tableCode += "<td>" + curr.bowlers[i].overs + "</td>";
+    	tableCode += "<td>" + curr.bowlers[i].maidens + "</td>";
+    	tableCode += "<td>" + curr.bowlers[i].runs + "</td>";
+    	tableCode += "<td>" + curr.bowlers[i].wickets + "</td>";
+    	tableCode += "</tr>";
+    }
+    tableCode += "</table>";
+    return tableCode;
+}
 /*
  * Function: launchStep
  * ----------------------------------------
@@ -185,6 +232,13 @@ function launchStep(step){
 	else if(step === 8) {
 		hideAll();
 		$("#step-eight").css("display", "block");
+		var temp = currBowling;
+		currBowling = currBatting;
+		currBatting = temp;
+		var tableCode = getTableCode(currBowling);
+		var tableBowl = getTableBowl(currBatting);
+		tableCode += tableBowl;
+     $("#elem").append(tableCode);
 	}
 }
 
@@ -487,29 +541,6 @@ function checkIfValid(step) {
 		}
 
 		return 4;
-	}
-
-	else if(step == 8) {
-    var tableCode = "<table>";
-        tableCode += "<tr>";
-        tableCode += "<th> Batsman Name </th>";
-        tableCode += "<th> Out </th>"
-        tableCode += "<th> R </th>";
-        tableCode += "<th> B </th>";
-        tableCode += "<th> F </th>";
-        tableCode += "<th> S </th>";
-        tableCode += "</tr>";
-     for(var i = 0; i < currBowling.batsmen.length; i++) {
-     	tableCode += "<tr>";
-     	tableCode += "<td>" + currBowling.batsmen[i].name + "</td>";
-     	tableCode += "<td>" + currBowling.batsmen[i].out + "</td>";
-        tableCode += "<td>" + currBowling.batsmen[i].runs + "</td>";
-        tableCode += "<td>" + currBowling.batsmen[i].balls + "</td>";
-        tableCode += "<td>" + currBowling.batsmen[i].fours + "</td>";
-        tableCode += "<td>" + currBowling.batsmen[i].sixes + "</td>";
-     }
-     tableCode += "</table>";
-    $("#elem").append(tableCode);
 	}
 
 	return 1;
