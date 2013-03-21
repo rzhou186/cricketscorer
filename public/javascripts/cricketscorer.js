@@ -371,9 +371,9 @@ function checkIfValid(step) {
 				currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 				currBatting.nonStrikeBatsman = temp;
 
-				if (bowler.runsBeforeOver === bowler.runs)
+				if (currBowling.bowler.runsBeforeOver === currBowling.bowler.runs)
 				{
-					bowler.maidens += 1;
+					currBowling.bowler.maidens += 1;
 				}
 
 				return 3;
