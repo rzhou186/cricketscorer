@@ -37,12 +37,18 @@ $(document).ready(function(){
  	// End Innings
  	$(".endInnings").click(function(){
 
+ 		if(currInnings == 3) {
+  			currStep = 8;
+ 			launchStep(currStep);
+ 		}
+ 		else {
  		var temp = currBatting;
  		currBatting = currBowling;
  		currBowling = temp;
  		currStep = 2;
  		currInnings += 1;
  		launchStep(currStep);
+ 		}
  	});
 
 });
@@ -56,8 +62,56 @@ function hideAll() {
 	$("#step-five").css("display", "none");
 	$("#step-six").css("display", "none");
 	$("#step-seven").css("display", "none");
+	$("#step-eight").css("display", "none");
 }
 
+function getTableCode (curr) {
+  var tableCode = "<table cellpadding = \"10\">";
+        tableCode += "<tr>";
+        tableCode += "<th> Name </th>";
+        tableCode += "<th> Out </th>"
+        tableCode += "<th> R </th>";
+        tableCode += "<th> B </th>";
+        tableCode += "<th> F </th>";
+        tableCode += "<th> S </th>";
+        tableCode += "</tr>";
+     for(var i = 0; i < curr.batsmen.length; i++) {
+     	tableCode += "<tr >";
+     	tableCode += "<td>" + curr.batsmen[i].name + "</td>";
+     	tableCode += "<td>" + curr.batsmen[i].out + "</td>";
+        tableCode += "<td>" + curr.batsmen[i].runs + "</td>";
+        tableCode += "<td>" + curr.batsmen[i].balls + "</td>";
+        tableCode += "<td>" + curr.batsmen[i].fours + "</td>";
+        tableCode += "<td>" + curr.batsmen[i].sixes + "</td>";
+        tableCode += "</tr>";
+     }
+     tableCode += "</table>";
+     tableCode += "Extras : " + curr.extras + "<br/>";
+     tableCode += "Final score : " + curr.score + "/" + curr.wickets + " (" + Math.floor(curr.numBalls/6) +"." + curr.numBalls%6 + " overs)" + "<br/>";
+return tableCode;
+}
+
+function getTableBowl(curr) {
+	var tableCode = "<table cellpadding = \"10\">";
+	tableCode += "<tr>";
+	tableCode += "<th>Name </th>";
+    tableCode += "<th> Overs </th>"
+    tableCode += "<th> M </th>";
+    tableCode += "<th> R </th>";
+    tableCode += "<th> W </th>";
+    tableCode += "</tr>";
+    for (var i = 0; i < curr.bowlers.length; i++) {
+    	tableCode += "<tr>";
+    	tableCode += "<td>" + curr.bowlers[i].name + "</td>";
+    	tableCode += "<td>" + curr.bowlers[i].overs + "</td>";
+    	tableCode += "<td>" + curr.bowlers[i].maidens + "</td>";
+    	tableCode += "<td>" + curr.bowlers[i].runs + "</td>";
+    	tableCode += "<td>" + curr.bowlers[i].wickets + "</td>";
+    	tableCode += "</tr>";
+    }
+    tableCode += "</table>";
+    return tableCode;
+}
 /*
  * Function: launchStep
  * ----------------------------------------
@@ -180,6 +234,17 @@ function launchStep(step){
 	else if (step === 7) {
 		hideAll();
 		$("#step-seven").css("display", "block");
+	}
+	else if(step === 8) {
+		hideAll();
+		$("#step-eight").css("display", "block");
+		var temp = currBowling;
+		currBowling = currBatting;
+		currBatting = temp;
+		var tableCode = getTableCode(currBowling);
+		var tableBowl = getTableBowl(currBatting);
+		tableCode += tableBowl;
+     $("#elem").append(tableCode);
 	}
 }
 
@@ -314,7 +379,7 @@ function checkIfValid(step) {
 				currBowling.bowler = i;	
 				break;		
 			}
-			bowler.runsBeforeOver = runs;
+			currBowling.bowlers[i].runsBeforeOver = runs;
 		}
 		currOver = [];
 		return 4;
@@ -366,9 +431,9 @@ function checkIfValid(step) {
 				currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 				currBatting.nonStrikeBatsman = temp;
 
-				if (bowler.runsBeforeOver === bowler.runs)
+				if (currBowling.bowlers[currBowling.bowler].runsBeforeOver === currBowling.bowlers[currBowling.bowler].runs)
 				{
-					bowler.maidens += 1;
+					currBowling.bowlers[currBowling.bowler].maidens += 1;
 				}
 
 				return 3;
@@ -381,6 +446,7 @@ function checkIfValid(step) {
 
 	// Register how wicket fell
 	else if(step == 6) {
+
 		if($("#batsmanSelect > button.active").val() === undefined) {
 			alert("Please select a batsman!");
 			return 6;
@@ -408,7 +474,7 @@ function checkIfValid(step) {
 		currOver.push(newBall);
 		currBatting.wickets+=1;
 		currBowling.bowlers[currBowling.bowler].balls += 1;
-		currBowling.bowlers[currBowling.bowlers].wickets += 1;
+		currBowling.bowlers[currBowling.bowler].wickets += 1;
 		currBatting.numBalls += 1;
 		return 2;
 	}
@@ -444,12 +510,12 @@ function checkIfValid(step) {
 			if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
 			if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
 			currBatting.extras += (runs + 1);
-			currBowling.bowler.noballs += 1;			
+			currBowling.bowlers[currBowling.bowler].noballs += 1;			
 		}
 		// Only team gets runs for wides
 		else if (extraType === "W") {
 			currBatting.extras += (runs + 1);
-			currBowling.bowler.wides += 1;			
+			currBowling.bowlers[currBowling.bowler].wides += 1;			
 		}
 
 		if (runs % 2 === 1)
@@ -472,9 +538,9 @@ function checkIfValid(step) {
 			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 			currBatting.nonStrikeBatsman = temp;
 
-			if (currBowling.bowler.runsBeforeOver === currBowling.bowler.runs)
+			if (currBowling.bowlers[currBowling.bowler].runsBeforeOver === currBowling.bowlers[currBowling.bowler].runs)
 			{
-				currBowling.bowler.maidens += 1;
+				currBowling.bowlers[currBowling.bowler].maidens += 1;
 			}
 
 			return 3;
