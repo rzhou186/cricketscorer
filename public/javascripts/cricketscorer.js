@@ -37,7 +37,13 @@ $(document).ready(function(){
  		currBowling = temp;
  		currStep = 2;
  		currInnings += 1;
+ 		if(currInnings === 2) {
+ 			currStep = 8;
+ 			launchStep(currStep);
+ 		}
+ 		else {
  		launchStep(currStep);
+ 		}
  	});
 
 });
@@ -51,6 +57,7 @@ function hideAll() {
 	$("#step-five").css("display", "none");
 	$("#step-six").css("display", "none");
 	$("#step-seven").css("display", "none");
+	$("#step-eight").css("display", "none");
 }
 
 /*
@@ -174,6 +181,10 @@ function launchStep(step){
 	else if (step === 7) {
 		hideAll();
 		$("#step-seven").css("display", "block");
+	}
+	else if(step === 8) {
+		hideAll();
+		$("#step-eight").css("display", "block");
 	}
 }
 
@@ -375,6 +386,7 @@ function checkIfValid(step) {
 
 	// Register how wicket fell
 	else if(step == 6) {
+
 		if($("#batsmanSelect > button.active").val() === undefined) {
 			alert("Please select a batsman!");
 			return 6;
@@ -402,7 +414,7 @@ function checkIfValid(step) {
 		currOver.push(newBall);
 		currBatting.wickets+=1;
 		currBowling.bowlers[currBowling.bowler].balls += 1;
-		currBowling.bowlers[currBowling.bowlers].wickets += 1;
+		currBowling.bowlers[currBowling.bowler].wickets += 1;
 		currBatting.numBalls += 1;
 		return 2;
 	}
@@ -475,6 +487,29 @@ function checkIfValid(step) {
 		}
 
 		return 4;
+	}
+
+	else if(step == 8) {
+    var tableCode = "<table>";
+        tableCode += "<tr>";
+        tableCode += "<th> Batsman Name </th>";
+        tableCode += "<th> Out </th>"
+        tableCode += "<th> R </th>";
+        tableCode += "<th> B </th>";
+        tableCode += "<th> F </th>";
+        tableCode += "<th> S </th>";
+        tableCode += "</tr>";
+     for(var i = 0; i < currBowling.batsmen.length; i++) {
+     	tableCode += "<tr>";
+     	tableCode += "<td>" + currBowling.batsmen[i].name + "</td>";
+     	tableCode += "<td>" + currBowling.batsmen[i].out + "</td>";
+        tableCode += "<td>" + currBowling.batsmen[i].runs + "</td>";
+        tableCode += "<td>" + currBowling.batsmen[i].balls + "</td>";
+        tableCode += "<td>" + currBowling.batsmen[i].fours + "</td>";
+        tableCode += "<td>" + currBowling.batsmen[i].sixes + "</td>";
+     }
+     tableCode += "</table>";
+    $("#elem").append(tableCode);
 	}
 
 	return 1;
