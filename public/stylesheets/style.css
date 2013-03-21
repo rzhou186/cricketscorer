@@ -62,11 +62,11 @@ body {
 .share-window {
 	width: 100%;
 	padding: 20px 0px 20px 0px;
-	background-color: rgb(245, 245, 245);
-	border-bottom-color: rgb(221, 221, 221);
+	background-color: #F5F5F5;
+	border-bottom-color: #DDDDDD;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
-	border-top-color: rgb(221, 221, 221);
+	border-top-color: #DDDDDD;
 	border-top-style: solid;
 	border-top-width: 1px;
 }
@@ -79,6 +79,11 @@ body {
 .app-window {
 	width: 100%;
 	padding: 40px 0px 40px 0px;
+}
+
+.app-window h2.lead {
+	font-size: 30px;
+	color: #5c5a5a;
 }
 
 input {
