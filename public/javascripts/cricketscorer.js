@@ -9,6 +9,11 @@
 
 $(document).ready(function(){
 
+	// Reload page if user clicks on navbar title button
+	$(".navbar-fixed-top a.brand").click(function(){
+		location.reload();
+	});
+
 	/*for(var i = 0; i < 6; i++) {
 		currOver.push(-1);
 	}*/
@@ -118,8 +123,9 @@ function launchStep(step){
 
 	if (step === 1) {
 
-		// Remove subhead window from DOM
+		// Remove subhead and sharing windows from DOM
  		$(".subhead-window").remove();
+ 		$(".share-window").remove();
 
  		// Update app window contents
 		hideAll();
@@ -378,7 +384,7 @@ function checkIfValid(step) {
 				currBowling.bowler = i;	
 				break;		
 			}
-			bowler.runsBeforeOver = runs;
+			currBowling.bowlers[i].runsBeforeOver = runs;
 		}
 		currOver = [];
 		return 4;
@@ -430,9 +436,9 @@ function checkIfValid(step) {
 				currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 				currBatting.nonStrikeBatsman = temp;
 
-				if (currBowling.bowler.runsBeforeOver === currBowling.bowler.runs)
+				if (currBowling.bowlers[currBowling.bowler].runsBeforeOver === currBowling.bowlers[currBowling.bowler].runs)
 				{
-					currBowling.bowler.maidens += 1;
+					currBowling.bowlers[currBowling.bowler].maidens += 1;
 				}
 
 				return 3;
@@ -509,12 +515,12 @@ function checkIfValid(step) {
 			if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
 			if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
 			currBatting.extras += (runs + 1);
-			currBowling.bowler.noballs += 1;			
+			currBowling.bowlers[currBowling.bowler].noballs += 1;			
 		}
 		// Only team gets runs for wides
 		else if (extraType === "W") {
 			currBatting.extras += (runs + 1);
-			currBowling.bowler.wides += 1;			
+			currBowling.bowlers[currBowling.bowler].wides += 1;			
 		}
 
 		if (runs % 2 === 1)
@@ -537,9 +543,9 @@ function checkIfValid(step) {
 			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 			currBatting.nonStrikeBatsman = temp;
 
-			if (currBowling.bowler.runsBeforeOver === currBowling.bowler.runs)
+			if (currBowling.bowlers[currBowling.bowler].runsBeforeOver === currBowling.bowlers[currBowling.bowler].runs)
 			{
-				currBowling.bowler.maidens += 1;
+				currBowling.bowlers[currBowling.bowler].maidens += 1;
 			}
 
 			return 3;
@@ -550,16 +556,4 @@ function checkIfValid(step) {
 
 	return 1;
 
-}
-
-
-/*----------------------- Step Functions ----------------------------------*/
-
-function stepOne() {
-
-		// Remove subhead window from DOM
- 		$(".subhead-window").remove();
- 		// Update app window contents
-		$("#step-zero").remove();
-		$("#step-one").css("display", "block");
 }
