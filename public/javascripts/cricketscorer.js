@@ -72,8 +72,8 @@ function getTableCode (curr) {
         tableCode += "<th> Out </th>"
         tableCode += "<th> R </th>";
         tableCode += "<th> B </th>";
-        tableCode += "<th> F </th>";
-        tableCode += "<th> S </th>";
+        tableCode += "<th> 4s </th>";
+        tableCode += "<th> 6s </th>";
         tableCode += "</tr>";
      for(var i = 0; i < curr.batsmen.length; i++) {
      	tableCode += "<tr style=\"border-top:solid 2px #000\">";
@@ -103,7 +103,7 @@ function getTableBowl(curr) {
     for (var i = 0; i < curr.bowlers.length; i++) {
     	tableCode += "<tr style=\"border-top:solid 2px #000\">";
     	tableCode += "<td>" + curr.bowlers[i].name + "</td>";
-    	tableCode += "<td>" + curr.bowlers[i].overs + "</td>";
+    	tableCode += "<td>" + Math.floor(curr.bowlers[i].balls/6)+ "</td>";
     	tableCode += "<td>" + curr.bowlers[i].maidens + "</td>";
     	tableCode += "<td>" + curr.bowlers[i].runs + "</td>";
     	tableCode += "<td>" + curr.bowlers[i].wickets + "</td>";
@@ -245,7 +245,6 @@ function launchStep(step){
 	    tableCode += getTableCode(currBowling);
 		var tableBowl = getTableBowl(currBatting);
 		tableCode += tableBowl;
-		tableCode += "<hr/><br/>"
 		tableCode += "<br/><center><h3>Team " +currBatting.Name + " </h3></center><br/>";
 		tableCode += getTableCode(currBatting);
 		tableCode += getTableBowl(currBowling);
@@ -356,7 +355,7 @@ function checkIfValid(step) {
 		var bowler = {
 			name:bowlerName,
 			runs: 0,
-			overs: 0,
+			balls: 0,
 			wickets: 0,
 			maidens: 0,
 			runsBeforeOver: 0,
