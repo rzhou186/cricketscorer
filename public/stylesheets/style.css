@@ -3,6 +3,8 @@ body {
 	padding-left: 0px;
 	padding-right: 0px;
 	text-align: center;
+	background-image: url('/images/fabric_of_squares_gray.png');
+	background-repeat: repeat;
 }
 
 .container {
@@ -11,6 +13,9 @@ body {
 
 .navbar-fixed-top {
 	margin-bottom: 0px;
+	border-bottom: solid;
+	border-width: 4px;
+	border-color: #1E90FF;
 }
 
 .navbar-fixed-top .container {
@@ -30,14 +35,50 @@ body {
 
 .subhead-window {
 	width: 100%;
-	padding: 80px 0px 80px 0px;
-	background-color: #66CCFF;
+	padding: 100px 0px 100px 0px;
+	background-image: url('/images/background-subhead-original.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-background-size: cover;
+     -moz-background-size: cover;
+			 -o-background-size: cover;
+}
+
+.subhead-window h1 {
+	font-size: 50px;
+	margin-bottom: 30px;
+}
+
+.subhead-window p {
+	font-size: 25px;
+	margin-bottom: 30px;
+}
+
+.subhead-window .btn-large {
+	height: 60px;
+	font-size: 20px;
+}
+
+.share-window {
+	width: 100%;
+	padding: 20px 0px 20px 0px;
+	background-color: rgb(245, 245, 245);
+	border-bottom-color: rgb(221, 221, 221);
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-top-color: rgb(221, 221, 221);
+	border-top-style: solid;
+	border-top-width: 1px;
+}
+
+.fb-like {
+	top: -3px;
+	margin-right: 20px;
 }
 
 .app-window {
 	width: 100%;
 	padding: 40px 0px 40px 0px;
-	background-color: #a9a9a9;
 }
 
 input {

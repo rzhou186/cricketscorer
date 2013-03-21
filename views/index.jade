@@ -5,13 +5,33 @@ block content
 	div.subhead-window
 		div.container
 			h1 CricketScorer
-			p.lead Sleek and powerful application for easy cricket scorekeeping.
+			p.lead A sleek, powerful application for dead simple cricket scorekeeping.
+			button.next-btn.btn.btn-primary.btn-large Start Application
+
+	div.share-window
+		div.container
+
+			// Like button (Facebook)
+			.fb-like(data-href='http://cricketscorer.herokuapp.com', data-send='false', data-layout='button_count', data-width='450', data-show-faces='false')
+
+			// Tweet button (Twitter)
+			a.twitter-share-button(href='https://twitter.com/share', data-lang='en') Tweet
+			script
+				!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+
+			// +1 button (Google+)
+			.g-plusone(data-size='medium')
+			script(type='text/javascript')
+				(function() {
+					var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+					po.src = 'https://apis.google.com/js/plusone.js';
+					var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+				})();
 
 	div.app-window
 
 		div#step-zero(style='display:block;')
 			div.container
-				button.next-btn.btn.btn-primary.btn-large Get Started
 
 		div#step-one(style='display:none;')
 			div.container

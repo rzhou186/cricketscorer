@@ -9,6 +9,11 @@
 
 $(document).ready(function(){
 
+	// Reload page if user clicks on navbar title button
+	$(".navbar-fixed-top a.brand").click(function(){
+		location.reload();
+	});
+
 	/*for(var i = 0; i < 6; i++) {
 		currOver.push(-1);
 	}*/
@@ -64,8 +69,9 @@ function launchStep(step){
 
 	if (step === 1) {
 
-		// Remove subhead window from DOM
+		// Remove subhead and sharing windows from DOM
  		$(".subhead-window").remove();
+ 		$(".share-window").remove();
 
  		// Update app window contents
 		hideAll();
@@ -479,16 +485,4 @@ function checkIfValid(step) {
 
 	return 1;
 
-}
-
-
-/*----------------------- Step Functions ----------------------------------*/
-
-function stepOne() {
-
-		// Remove subhead window from DOM
- 		$(".subhead-window").remove();
- 		// Update app window contents
-		$("#step-zero").remove();
-		$("#step-one").css("display", "block");
 }
