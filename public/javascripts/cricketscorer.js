@@ -504,12 +504,12 @@ function checkIfValid(step) {
 			if(runs === 4) currBatting.batsmen[currBatting.strikeBatsman].fours += 1;
 			if(runs === 6) currBatting.batsmen[currBatting.strikeBatsman].sixes += 1;
 			currBatting.extras += (runs + 1);
-			currBowling.bowler.noballs += 1;			
+			currBowling.bowlers[currBowling.bowler].noballs += 1;			
 		}
 		// Only team gets runs for wides
 		else if (extraType === "W") {
 			currBatting.extras += (runs + 1);
-			currBowling.bowler.wides += 1;			
+			currBowling.bowlers[currBowling.bowler].wides += 1;			
 		}
 
 		if (runs % 2 === 1)
@@ -532,9 +532,9 @@ function checkIfValid(step) {
 			currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 			currBatting.nonStrikeBatsman = temp;
 
-			if (currBowling.bowler.runsBeforeOver === currBowling.bowler.runs)
+			if (currBowling.bowlers[currBowling.bowler].runsBeforeOver === currBowling.bowlers[currBowling.bowler].runs)
 			{
-				currBowling.bowler.maidens += 1;
+				currBowling.bowlers[currBowling.bowler].maidens += 1;
 			}
 
 			return 3;
