@@ -61,7 +61,7 @@ function hideAll() {
 }
 
 function getTableCode (curr) {
-  var tableCode = "<table cellpadding = \"10\">";
+  var tableCode = "<center><table cellpadding = \"10\">";
         tableCode += "<tr>";
         tableCode += "<th> Name </th>";
         tableCode += "<th> Out </th>"
@@ -71,7 +71,7 @@ function getTableCode (curr) {
         tableCode += "<th> S </th>";
         tableCode += "</tr>";
      for(var i = 0; i < curr.batsmen.length; i++) {
-     	tableCode += "<tr >";
+     	tableCode += "<tr style=\"border-top:solid 2px #000\">";
      	tableCode += "<td>" + curr.batsmen[i].name + "</td>";
      	tableCode += "<td>" + curr.batsmen[i].out + "</td>";
         tableCode += "<td>" + curr.batsmen[i].runs + "</td>";
@@ -82,12 +82,12 @@ function getTableCode (curr) {
      }
      tableCode += "</table>";
      tableCode += "Extras : " + curr.extras + "<br/>";
-     tableCode += "Final score : " + curr.score + "/" + curr.wickets + " (" + Math.floor(curr.numBalls/6) +"." + curr.numBalls%6 + " overs)" + "<br/>";
+     tableCode += "Final score : " + curr.score + "/" + curr.wickets + " (" + Math.floor(curr.numBalls/6) +"." + curr.numBalls%6 + " overs)" + "<br/> </center>";
 return tableCode;
 }
 
 function getTableBowl(curr) {
-	var tableCode = "<table cellpadding = \"10\">";
+	var tableCode = "<center><table cellpadding = \"10\">";
 	tableCode += "<tr>";
 	tableCode += "<th>Name </th>";
     tableCode += "<th> Overs </th>"
@@ -96,7 +96,7 @@ function getTableBowl(curr) {
     tableCode += "<th> W </th>";
     tableCode += "</tr>";
     for (var i = 0; i < curr.bowlers.length; i++) {
-    	tableCode += "<tr>";
+    	tableCode += "<tr style=\"border-top:solid 2px #000\">";
     	tableCode += "<td>" + curr.bowlers[i].name + "</td>";
     	tableCode += "<td>" + curr.bowlers[i].overs + "</td>";
     	tableCode += "<td>" + curr.bowlers[i].maidens + "</td>";
@@ -104,7 +104,7 @@ function getTableBowl(curr) {
     	tableCode += "<td>" + curr.bowlers[i].wickets + "</td>";
     	tableCode += "</tr>";
     }
-    tableCode += "</table>";
+    tableCode += "</table> </center>";
     return tableCode;
 }
 /*
@@ -235,9 +235,14 @@ function launchStep(step){
 		var temp = currBowling;
 		currBowling = currBatting;
 		currBatting = temp;
-		var tableCode = getTableCode(currBowling);
+		var tableCode = "<center><h3>Team " +currBowling.Name + " </h3></center><br/>";
+	    tableCode += getTableCode(currBowling);
 		var tableBowl = getTableBowl(currBatting);
 		tableCode += tableBowl;
+		tableCode += "<hr/><br/>"
+		tableCode += "<br/><center><h3>Team " +currBatting.Name + " </h3></center><br/>";
+		tableCode += getTableCode(currBatting);
+		tableCode += getTableBowl(currBowling);
      $("#elem").append(tableCode);
 	}
 }
