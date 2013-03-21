@@ -373,7 +373,7 @@ function checkIfValid(step) {
 				currBowling.bowler = i;	
 				break;		
 			}
-			bowler.runsBeforeOver = runs;
+			currBowling.bowlers[i].runsBeforeOver = runs;
 		}
 		currOver = [];
 		return 4;
@@ -425,9 +425,9 @@ function checkIfValid(step) {
 				currBatting.strikeBatsman = currBatting.nonStrikeBatsman;
 				currBatting.nonStrikeBatsman = temp;
 
-				if (currBowling.bowler.runsBeforeOver === currBowling.bowler.runs)
+				if (currBowling.bowlers[currBowling.bowler].runsBeforeOver === currBowling.bowlers[currBowling.bowler].runs)
 				{
-					currBowling.bowler.maidens += 1;
+					currBowling.bowlers[currBowling.bowler].maidens += 1;
 				}
 
 				return 3;
