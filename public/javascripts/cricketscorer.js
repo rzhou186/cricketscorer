@@ -260,14 +260,14 @@ function launchStep(step){
 		var tableCode = "<center><h3>Team " +currBowling.Name + " </h3></center><br/>";
 		var scoreCard = "Team " + currBowling.Name + " XXXX";
 		scoreCard += getScoreBat(currBowling);
-		scoreCard = "Bowling statistics " + " XXXX";
+		scoreCard += "Bowling statistics " + " XXXX";
 		scoreCard += getScoreBall(currBatting);
 	    tableCode += getTableCode(currBowling);
 		var tableBowl = getTableBowl(currBatting);
 		tableCode += tableBowl;
 		scoreCard += "Team " + currBatting.Name + " XXXX";
 		scoreCard += getScoreBat(currBatting);
-		scoreCard = "Bowling statistics " + " XXXX";
+		scoreCard += "Bowling statistics " + " XXXX";
 		scoreCard += getScoreBall(currBowling);
 		tableCode += "<br/><center><h3>Team " +currBatting.Name + " </h3></center><br/>";
 		tableCode += getTableCode(currBatting);
