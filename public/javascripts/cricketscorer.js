@@ -9,10 +9,8 @@
 
 $(document).ready(function(){
 
-	// Reload page if user clicks on navbar title button
-	$(".navbar-fixed-top a.brand").click(function(){
-		location.reload();
-	});
+	// Initialize "Contact" URI
+	initContacts("surilrshah@gmail.com");
 
 	/*for(var i = 0; i < 6; i++) {
 		currOver.push(-1);
