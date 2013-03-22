@@ -112,6 +112,24 @@ function getTableBowl(curr) {
     tableCode += "</table> </center>";
     return tableCode;
 }
+
+function getScoreBat(curr) {
+	var scoreCard = "";
+	for(var i = 0; i < curr.batsmen.length; i++) {
+		scoreCard += curr.batsmen[i].name + " : "  + curr.batsmen[i].out + ", " + curr.batsmen[i].runs + ", " + curr.batsmen[i].balls + ", " + curr.batsmen[i].fours + ", " + curr.batsmen[i].sixes + " \n ";
+	}
+	scoreCard += "Extras : " + curr.extras  + "<br/>";
+	scoreCard += "Final Score : " + curr.score + "/" + curr.wickets + " (" + Math.floor(curr.numBalls/6) +"." + curr.numBalls%6 + " overs) \n";
+	return scoreCard;
+}
+
+function getScoreBall(curr) {
+	var scoreCard = "";
+	for(var i = 0; i < curr.bowlers.length; i++) {
+		scoreCard += curr.bowlers[i].name + " : " + Math.floor(curr.bowlers[i].balls/6) + ", " + curr.bowlers[i].maidens + ", " + curr.bowlers[i].runs + ", " + curr.bowlers[i].wickets + " \n";
+	}
+	return scoreCard;
+}
 /*
  * Function: launchStep
  * ----------------------------------------
@@ -242,13 +260,20 @@ function launchStep(step){
 		currBowling = currBatting;
 		currBatting = temp;
 		var tableCode = "<center><h3>Team " +currBowling.Name + " </h3></center><br/>";
+		var scoreCard = "Team " + currBowling.Name + "\n";
+		scoreCard += getScoreBat(currBowling);
+		scoreCard += getScoreBall(currBatting);
 	    tableCode += getTableCode(currBowling);
 		var tableBowl = getTableBowl(currBatting);
 		tableCode += tableBowl;
+		scoreCard += "Team " + currBatting.Name + "\n";
+		scoreCard += getScoreBat(currBatting);
+		scoreCard += getScoreBall(currBowling);
 		tableCode += "<br/><center><h3>Team " +currBatting.Name + " </h3></center><br/>";
 		tableCode += getTableCode(currBatting);
 		tableCode += getTableBowl(currBowling);
      $("#elem").append(tableCode);
+     emailScorecard(scoreCard);
 	}
 }
 
