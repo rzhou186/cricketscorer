@@ -112,19 +112,19 @@ function getTableBowl(curr) {
 }
 
 function getScoreBat(curr) {
-	var scoreCard = "";
+	var scoreCard = " ";
 	for(var i = 0; i < curr.batsmen.length; i++) {
-		scoreCard += curr.batsmen[i].name + " : "  + curr.batsmen[i].out + ", " + curr.batsmen[i].runs + ", " + curr.batsmen[i].balls + ", " + curr.batsmen[i].fours + ", " + curr.batsmen[i].sixes + " \n ";
+		scoreCard += curr.batsmen[i].name + " : "  + curr.batsmen[i].out + ", " + curr.batsmen[i].runs + ", " + curr.batsmen[i].balls + ", " + curr.batsmen[i].fours + ", " + curr.batsmen[i].sixes + " XXXX ";
 	}
-	scoreCard += "Extras : " + curr.extras  + "<br/>";
-	scoreCard += "Final Score : " + curr.score + "/" + curr.wickets + " (" + Math.floor(curr.numBalls/6) +"." + curr.numBalls%6 + " overs) \n";
+	scoreCard += "Extras : " + curr.extras + " XXXX";
+	scoreCard += "Final Score : " + curr.score + "/" + curr.wickets + " (" + Math.floor(curr.numBalls/6) +"." + curr.numBalls%6 + " overs) XXXX";
 	return scoreCard;
 }
 
 function getScoreBall(curr) {
-	var scoreCard = "";
+	var scoreCard = " ";
 	for(var i = 0; i < curr.bowlers.length; i++) {
-		scoreCard += curr.bowlers[i].name + " : " + Math.floor(curr.bowlers[i].balls/6) + ", " + curr.bowlers[i].maidens + ", " + curr.bowlers[i].runs + ", " + curr.bowlers[i].wickets + " \n";
+		scoreCard += curr.bowlers[i].name + " : " + Math.floor(curr.bowlers[i].balls/6) + ", " + curr.bowlers[i].maidens + ", " + curr.bowlers[i].runs + ", " + curr.bowlers[i].wickets + " XXXX";
 	}
 	return scoreCard;
 }
@@ -258,14 +258,16 @@ function launchStep(step){
 		currBowling = currBatting;
 		currBatting = temp;
 		var tableCode = "<center><h3>Team " +currBowling.Name + " </h3></center><br/>";
-		var scoreCard = "Team " + currBowling.Name + "\n";
+		var scoreCard = "Team " + currBowling.Name + " XXXX";
 		scoreCard += getScoreBat(currBowling);
+		scoreCard = "Bowling statistics " + " XXXX";
 		scoreCard += getScoreBall(currBatting);
 	    tableCode += getTableCode(currBowling);
 		var tableBowl = getTableBowl(currBatting);
 		tableCode += tableBowl;
-		scoreCard += "Team " + currBatting.Name + "\n";
+		scoreCard += "Team " + currBatting.Name + " XXXX";
 		scoreCard += getScoreBat(currBatting);
+		scoreCard = "Bowling statistics " + " XXXX";
 		scoreCard += getScoreBall(currBowling);
 		tableCode += "<br/><center><h3>Team " +currBatting.Name + " </h3></center><br/>";
 		tableCode += getTableCode(currBatting);
