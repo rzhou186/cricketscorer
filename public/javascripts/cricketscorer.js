@@ -34,7 +34,7 @@ $(document).ready(function(){
 
  	// End Innings
  	$(".endInnings").click(function(){
-
+ 		currInnings += 1;
  		if(currInnings == 3) {
   			currStep = 8;
  			launchStep(currStep);
@@ -44,7 +44,6 @@ $(document).ready(function(){
  		currBatting = currBowling;
  		currBowling = temp;
  		currStep = 2;
- 		currInnings += 1;
  		launchStep(currStep);
  		}
  	});
