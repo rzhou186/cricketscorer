@@ -96,6 +96,11 @@ body {
 	font-size: 18px;
 }
 
+.app-window .feature-window img {
+	max-width: 200px;
+	margin-bottom: 20px;
+}
+
 input {
 	margin-left: auto;
 	margin-right: auto;
