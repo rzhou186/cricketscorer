@@ -36,6 +36,7 @@ body {
 .subhead-window {
 	width: 100%;
 	padding: 100px 0px 100px 0px;
+	background-color: #ffffff;
 	background-image: url('/images/background-subhead-original.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -84,6 +85,11 @@ body {
 .app-window h2.lead {
 	font-size: 30px;
 	color: #5c5a5a;
+}
+
+.app-window p {
+	font-size: 20px;
+	margin-bottom: 30px;
 }
 
 input {
